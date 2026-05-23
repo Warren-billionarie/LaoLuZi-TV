@@ -56,10 +56,10 @@ const SOURCE_C_CHANNELS = [
   { alias: 'CCTV9', articleId: '7252237247689203957', maxLines: 2 },
 ];
 
-const C9_FALLBACK = {
-  url: 'https://timetv.shop/http://74.91.26.218:82/live/cctv9hd.m3u8',
-  headers: { Origin: 'https://yibababa.com' },
-};
+const C9_FALLBACKS = [
+  { url: 'https://timetv.shop/http://74.91.26.218:82/live/cctv9hd.m3u8', headers: { Origin: 'https://yibababa.com' } },
+  { url: 'http://play.kankanlive.com/live/1698423397390920.m3u8', headers: {} },
+];
 
 // ---- static ----
 const STATIC_CHANNELS = [
@@ -347,8 +347,10 @@ async function main() {
       console.error(`[fail] C ${cfg.alias}: ${e.message}`);
     }
   }
-  c9Lines.push({ alias: 'CCTV9', url: C9_FALLBACK.url, headers: C9_FALLBACK.headers });
-  console.error(`[static] CCTV9 fallback: ${C9_FALLBACK.url.slice(0, 90)}...`);
+  for (const fb of C9_FALLBACKS) {
+    c9Lines.push({ alias: 'CCTV9', url: fb.url, headers: fb.headers });
+    console.error(`[static] CCTV9 fallback: ${fb.url.slice(0, 90)}...`);
+  }
 
   const totalDynamic = aResults.length + bResults.length;
   if (totalDynamic === 0) {
