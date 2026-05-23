@@ -1,5 +1,5 @@
 体育,#genre#
-五星体育,https://volc-stream.kksmg.com/live/wxty/index.m3u8?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOiJsaXZlIiwiZG9tYWluIjoidm9sYy1zdHJlYW0ua2tzbWcuY29tIiwiZXhwIjoxNzc5NjEzMTMyLCJpYXQiOjE3Nzk1Njk5MzIsIm5vbmNlIjoiYThqdHgwOGMiLCJwbGF0Zm9ybSI6InBjIiwic3RyZWFtX25hbWUiOiJ3eHR5IiwidWFfaGFzaCI6ImtOcWxVV0JDYWR2Tnp5TjdYTWNBOHciLCJ1c2VyX2lkIjowLCJ1c2VyX2lwIjoiNTIuMTU5LjIyOS42NiIsInV1aWQiOiJXcFZTQnIwdmdrQmhXck5NemltUUMiLCJ2ZXJzaW9uIjoiMi40MS42In0.ITPTfk7N3wvsJIaw29kQbzV0U_Ia8iCvQ6SxpwfpEyU&volcSecret=284def483d2f04f2ae7d65801f1c8672&volcTime=1779613132|Referer=https://live.kankanews.com/&Origin=https://live.kankanews.com&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
+五星体育,https://volc-stream.kksmg.com/live/wxty/index.m3u8?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOiJsaXZlIiwiZG9tYWluIjoidm9sYy1zdHJlYW0ua2tzbWcuY29tIiwiZXhwIjoxNzc5NjIyNTI3LCJpYXQiOjE3Nzk1NzkzMjcsIm5vbmNlIjoic2diNXhiemgiLCJwbGF0Zm9ybSI6InBjIiwic3RyZWFtX25hbWUiOiJ3eHR5IiwidWFfaGFzaCI6ImtOcWxVV0JDYWR2Tnp5TjdYTWNBOHciLCJ1c2VyX2lkIjowLCJ1c2VyX2lwIjoiMTM1LjIzMi4yMDAuMjA5IiwidXVpZCI6IldwVlNCcjB2Z2tCaFdyTk16aW1RQyIsInZlcnNpb24iOiIyLjQxLjYifQ.aP6NgjXHjX_zpa4ec75CE0bjkm9GVQeKusCDicQ0trI&volcSecret=b913a3089541502ca9e1c80d57ceaaf9&volcTime=1779622527|Referer=https://live.kankanews.com/&Origin=https://live.kankanews.com&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
 CCTV5,https://timetv.fit/http://43.175.97.11/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078401_dlna.m3u8|Origin=https://yibababa.com
 CCTV5,https://timetv.fit/http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078401_dlna.m3u8|Origin=https://yibababa.com
 CCTV5,https://timetv.shop/http://74.91.26.218:82/live/cctv5hd.m3u8|Origin=https://yibababa.com
@@ -9,9 +9,10 @@ CCTV5+,https://timetv.fit/http://74.91.26.218:82/live/cctv5p.m3u8|Origin=https:/
 ESPN,https://timetv.shop/http://41.205.93.154/ESPN/index.m3u8|Origin=https://yibababa.com
 Eurosport 1,https://timetv.shop/http://151.80.18.177:86/Eurosport_HD/index.m3u8|Origin=https://yibababa.com
 央视,#genre#
-CCTV9,https://live-play-hls.cctvnews.cctv.com/CCTVChannel/channel_cctv9_mbd.m3u8?auth_key=1779623100-1-5d8b0e2983452f71d1d0736a6951eccebe6e45930cc60236db05d542b60737a1-851c6b0d4140c05f54c64f83f6f64515&yid=5d8b0e2983452f71d1d0736a6951eccebe6e45930cc60236db05d542b60737a1
-CCTV9,https://live-play-hls.cctvnews.cctv.com/CCTVChannel/channel_cctv9_mhd.m3u8?auth_key=1779623100-1-5d8b0e2983452f71d1d0736a6951eccebe6e45930cc60236db05d542b60737a1-5785b8d54a816f6cac30543e681cb79d&yid=5d8b0e2983452f71d1d0736a6951eccebe6e45930cc60236db05d542b60737a1
+CCTV9,https://live-play-hls.cctvnews.cctv.com/CCTVChannel/channel_cctv9_mbd.m3u8?auth_key=1779633000-1-5dc2a2fb39c83283d77b4aabf15da812450bf1ccad194911ae91eceea85aff16-4b500c33088489df867da94297f82ad6&yid=5dc2a2fb39c83283d77b4aabf15da812450bf1ccad194911ae91eceea85aff16
+CCTV9,https://live-play-hls.cctvnews.cctv.com/CCTVChannel/channel_cctv9_mhd.m3u8?auth_key=1779633000-1-5dc2a2fb39c83283d77b4aabf15da812450bf1ccad194911ae91eceea85aff16-fbae9be533f8d9647bc47ab9bd04c6d8&yid=5dc2a2fb39c83283d77b4aabf15da812450bf1ccad194911ae91eceea85aff16
 CCTV9,https://timetv.shop/http://74.91.26.218:82/live/cctv9hd.m3u8|Origin=https://yibababa.com
+CCTV9,http://play.kankanlive.com/live/1698423397390920.m3u8
 CCTV13,https://cdn3.163189.xyz/163189/cctv13
 港澳台,#genre#
 凤凰中文,http://cdn6.163189.xyz/163189/fhzw
