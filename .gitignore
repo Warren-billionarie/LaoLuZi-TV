@@ -1,0 +1,26 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 本地调试缓存(逆向工程产物,不要推上去)
+*.network-response
+*.png
+temp/
+debug/
+
+# 敏感凭据(GitHub PAT 等),绝对不能进 public 仓库
+github-token.txt
+*token*.txt
+*.pem
+*.key
