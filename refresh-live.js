@@ -52,14 +52,11 @@ const SOURCE_C = {
   TIMEOUT_MS: 8000,
 };
 
-const SOURCE_C_CHANNELS = [
-  { alias: 'CCTV9', articleId: '7252237247689203957', maxLines: 2 },
-];
+const SOURCE_C_CHANNELS = [];
 
 const C9_FALLBACKS = [
-  { url: 'https://timetv.shop/http://74.91.26.218:82/live/cctv9hd.m3u8', headers: { Origin: 'https://yibababa.com' } },
-  { url: 'http://play.kankanlive.com/live/1698423397390920.m3u8', headers: {} },
   { url: 'http://74.91.26.218:82/live/cctv9hd.m3u8', headers: {} },
+  { url: 'https://timetv.shop/http://74.91.26.218:82/live/cctv9hd.m3u8', headers: { Origin: 'https://yibababa.com' } },
 ];
 
 // ---- static ----
