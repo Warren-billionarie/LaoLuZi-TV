@@ -1,5 +1,5 @@
 体育,#genre#
-五星体育,https://volc-stream.kksmg.com/live/wxty/index.m3u8?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOiJsaXZlIiwiZG9tYWluIjoidm9sYy1zdHJlYW0ua2tzbWcuY29tIiwiZXhwIjoxNzc5NjQ2NjA0LCJpYXQiOjE3Nzk2MDM0MDQsIm5vbmNlIjoiYng0bzBodzIiLCJwbGF0Zm9ybSI6InBjIiwic3RyZWFtX25hbWUiOiJ3eHR5IiwidWFfaGFzaCI6ImtOcWxVV0JDYWR2Tnp5TjdYTWNBOHciLCJ1c2VyX2lkIjowLCJ1c2VyX2lwIjoiMTcyLjk4LjIxOS42MiIsInV1aWQiOiJXcFZTQnIwdmdrQmhXck5NemltUUMiLCJ2ZXJzaW9uIjoiMi40MS42In0.OE4vqn5dUFXsJZf39kRp7-GXdL2r2a-8hpCM7_sQY1s&volcSecret=675ffe17f3699e96325f32a59ccff1ee&volcTime=1779646630|Referer=https://live.kankanews.com/&Origin=https://live.kankanews.com&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
+五星体育,https://volc-stream.kksmg.com/live/wxty/index.m3u8?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOiJsaXZlIiwiZG9tYWluIjoidm9sYy1zdHJlYW0ua2tzbWcuY29tIiwiZXhwIjoxNzc5NjQ3MDg5LCJpYXQiOjE3Nzk2MDM4ODksIm5vbmNlIjoieTdheW5xMzMiLCJwbGF0Zm9ybSI6InBjIiwic3RyZWFtX25hbWUiOiJ3eHR5IiwidWFfaGFzaCI6ImtOcWxVV0JDYWR2Tnp5TjdYTWNBOHciLCJ1c2VyX2lkIjowLCJ1c2VyX2lwIjoiMTA0LjIwOS41LjE0NSIsInV1aWQiOiJXcFZTQnIwdmdrQmhXck5NemltUUMiLCJ2ZXJzaW9uIjoiMi40MS42In0.zjFSgqnjXOdX5EclIasYAlJ-tC8u3PxKUhCFi1sZ66s&volcSecret=8b3439acc7adda27c024bbb8ae7e6530&volcTime=1779647089|Referer=https://live.kankanews.com/&Origin=https://live.kankanews.com&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
 CCTV5,https://timetv.fit/http://43.175.97.11/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078401_dlna.m3u8|Origin=https://yibababa.com
 CCTV5,https://timetv.fit/http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078401_dlna.m3u8|Origin=https://yibababa.com
 CCTV5,https://timetv.shop/http://74.91.26.218:82/live/cctv5hd.m3u8|Origin=https://yibababa.com
@@ -13,7 +13,6 @@ CCTV9,http://74.91.26.218:82/live/cctv9hd.m3u8
 CCTV9,https://timetv.shop/http://74.91.26.218:82/live/cctv9hd.m3u8|Origin=https://yibababa.com
 CCTV13,http://74.91.26.218:82/live/cctv13hd.m3u8
 CCTV13,https://timetv.shop/http://74.91.26.218:82/live/cctv13hd.m3u8|Origin=https://yibababa.com
-CCTV13,https://cdn3.163189.xyz/163189/cctv13
 港澳台,#genre#
 凤凰中文,http://cdn6.163189.xyz/163189/fhzw
 凤凰资讯,http://cdn6.163189.xyz/163189/fhzx
