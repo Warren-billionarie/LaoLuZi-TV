@@ -59,9 +59,13 @@ const C9_FALLBACKS = [
   { url: 'https://timetv.shop/http://74.91.26.218:82/live/cctv9hd.m3u8', headers: { Origin: 'https://yibababa.com' } },
 ];
 
+const C13_FALLBACKS = [
+  { url: 'http://74.91.26.218:82/live/cctv13hd.m3u8', headers: {} },
+  { url: 'https://timetv.shop/http://74.91.26.218:82/live/cctv13hd.m3u8', headers: { Origin: 'https://yibababa.com' } },
+];
+
 // ---- static ----
 const STATIC_CHANNELS = [
-  { alias: 'CCTV13', url: 'http://183.223.157.123:85/tsfile/live/0013_1.m3u8?key=txiptv&playlive=1&authid=0' },
   { alias: 'CCTV13', url: 'https://cdn3.163189.xyz/163189/cctv13' },
   { alias: '凤凰中文', url: 'http://cdn6.163189.xyz/163189/fhzw' },
   { alias: '凤凰资讯', url: 'http://cdn6.163189.xyz/163189/fhzx' },
@@ -282,7 +286,7 @@ function suffix(headers) {
   return '|' + Object.entries(headers).map(([k, v]) => `${k}=${v}`).join('&');
 }
 
-function build({ aResults, bResults, bExtra, c9Lines, statics }) {
+function build({ aResults, bResults, bExtra, c9Lines, c13Lines, statics }) {
   const aSuffix = suffix(SOURCE_A_HEADERS);
   const bSuffix = suffix({ Origin: SOURCE_B.ORIGIN });
 
@@ -295,6 +299,10 @@ function build({ aResults, bResults, bExtra, c9Lines, statics }) {
   lines.push('央视,#genre#');
   for (const ch of bExtra) lines.push(`${ch.alias},${ch.url}${bSuffix}`);
   for (const ch of c9Lines) {
+    const s = ch.headers && Object.keys(ch.headers).length > 0 ? suffix(ch.headers) : '';
+    lines.push(`${ch.alias},${ch.url}${s}`);
+  }
+  for (const ch of c13Lines) {
     const s = ch.headers && Object.keys(ch.headers).length > 0 ? suffix(ch.headers) : '';
     lines.push(`${ch.alias},${ch.url}${s}`);
   }
@@ -351,13 +359,19 @@ async function main() {
     console.error(`[static] CCTV9 fallback: ${fb.url.slice(0, 90)}...`);
   }
 
+  const c13Lines = [];
+  for (const fb of C13_FALLBACKS) {
+    c13Lines.push({ alias: 'CCTV13', url: fb.url, headers: fb.headers });
+    console.error(`[static] CCTV13 fallback: ${fb.url.slice(0, 90)}...`);
+  }
+
   const totalDynamic = aResults.length + bResults.length;
   if (totalDynamic === 0) {
     console.error('[fatal] no dynamic channels resolved, aborting');
     process.exit(2);
   }
 
-  const txt = build({ aResults, bResults, bExtra, c9Lines, statics });
+  const txt = build({ aResults, bResults, bExtra, c9Lines, c13Lines, statics });
 
   const outArg = process.argv.find(a => a.startsWith('--out='));
   if (outArg) {
