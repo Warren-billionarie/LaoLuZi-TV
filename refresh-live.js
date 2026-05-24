@@ -3,7 +3,6 @@
 
 const crypto = require('crypto');
 const fs = require('fs');
-const { execFileSync } = require('child_process');
 
 // ---- source A ----
 const SOURCE_A = {
@@ -60,18 +59,9 @@ const C9_FALLBACKS = [
   { url: 'https://timetv.shop/http://74.91.26.218:82/live/cctv9hd.m3u8', headers: { Origin: 'https://yibababa.com' } },
 ];
 
-// ---- source D ----
-const SOURCE_D = {
-  BIN: process.env.YTDLP_BIN || 'yt-dlp',
-  TIMEOUT_MS: 30000,
-};
-
-const SOURCE_D_CHANNELS = [
-  { alias: 'CCTV13', videoId: 'RuRUCXNAHBU' },
-];
-
 // ---- static ----
 const STATIC_CHANNELS = [
+  { alias: 'CCTV13', url: 'http://183.223.157.123:85/tsfile/live/0013_1.m3u8?key=txiptv&playlive=1&authid=0' },
   { alias: 'CCTV13', url: 'https://cdn3.163189.xyz/163189/cctv13' },
   { alias: '凤凰中文', url: 'http://cdn6.163189.xyz/163189/fhzw' },
   { alias: '凤凰资讯', url: 'http://cdn6.163189.xyz/163189/fhzx' },
@@ -288,23 +278,11 @@ async function fetchC(articleId) {
   return urls.filter(u => u && u.startsWith('http'));
 }
 
-function fetchD(videoId) {
-  const url = `https://www.youtube.com/watch?v=${videoId}`;
-  const out = execFileSync(
-    SOURCE_D.BIN,
-    ['--print', '%(manifest_url)s', '--no-warnings', '--', url],
-    { encoding: 'utf8', timeout: SOURCE_D.TIMEOUT_MS, stdio: ['ignore', 'pipe', 'pipe'] },
-  );
-  const u = out.trim().split(/\r?\n/).pop();
-  if (!u || !u.startsWith('http')) throw new Error(`bad output: ${u}`);
-  return u;
-}
-
 function suffix(headers) {
   return '|' + Object.entries(headers).map(([k, v]) => `${k}=${v}`).join('&');
 }
 
-function build({ aResults, bResults, bExtra, c9Lines, dResults, statics }) {
+function build({ aResults, bResults, bExtra, c9Lines, statics }) {
   const aSuffix = suffix(SOURCE_A_HEADERS);
   const bSuffix = suffix({ Origin: SOURCE_B.ORIGIN });
 
@@ -320,7 +298,6 @@ function build({ aResults, bResults, bExtra, c9Lines, dResults, statics }) {
     const s = ch.headers && Object.keys(ch.headers).length > 0 ? suffix(ch.headers) : '';
     lines.push(`${ch.alias},${ch.url}${s}`);
   }
-  for (const ch of dResults) lines.push(`${ch.alias},${ch.url}`);
   for (const ch of statics.filter(c => c.alias.startsWith('CCTV'))) lines.push(`${ch.alias},${ch.url}`);
 
   lines.push('港澳台,#genre#');
@@ -374,25 +351,13 @@ async function main() {
     console.error(`[static] CCTV9 fallback: ${fb.url.slice(0, 90)}...`);
   }
 
-  console.error('[info] D...');
-  const dResults = [];
-  for (const ch of SOURCE_D_CHANNELS) {
-    try {
-      const u = fetchD(ch.videoId);
-      console.error(`[ok] ${ch.alias} (D): ${u.slice(0, 90)}...`);
-      dResults.push({ alias: ch.alias, url: u });
-    } catch (e) {
-      console.error(`[fail] D ${ch.alias}: ${e.message}`);
-    }
-  }
-
   const totalDynamic = aResults.length + bResults.length;
   if (totalDynamic === 0) {
     console.error('[fatal] no dynamic channels resolved, aborting');
     process.exit(2);
   }
 
-  const txt = build({ aResults, bResults, bExtra, c9Lines, dResults, statics });
+  const txt = build({ aResults, bResults, bExtra, c9Lines, statics });
 
   const outArg = process.argv.find(a => a.startsWith('--out='));
   if (outArg) {

@@ -29,9 +29,6 @@ jobs:
         with:
           node-version: '20'
 
-      - name: extras
-        run: pipx install yt-dlp
-
       - name: run
         run: node refresh-live.js --out=live.txt
 
