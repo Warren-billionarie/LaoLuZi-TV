@@ -66,7 +66,6 @@ const C13_FALLBACKS = [
 
 // ---- static ----
 const STATIC_CHANNELS = [
-  { alias: 'CCTV13', url: 'https://cdn3.163189.xyz/163189/cctv13' },
   { alias: '凤凰中文', url: 'http://cdn6.163189.xyz/163189/fhzw' },
   { alias: '凤凰资讯', url: 'http://cdn6.163189.xyz/163189/fhzx' },
 ];
