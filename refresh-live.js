@@ -19,7 +19,8 @@ tSqSgXDcJ7yDj5rc7wIDAQAB
 };
 
 const SOURCE_A_CHANNELS = [
-  { id: 10, name: '五星体育' },
+  { id: 10, name: '五星体育', group: '体育' },
+  { id: 12, name: '新纪实', group: '纪实' },
 ];
 
 const SOURCE_A_HEADERS = {
@@ -35,7 +36,7 @@ const SOURCE_B = {
 };
 
 const SOURCE_B_WANTED = [
-  { match: /^[^,]*CCTV-5体育\(\d+\)/, alias: 'CCTV5', multi: true, maxLines: 3, preferContains: 'hlslive-tx-cdn.ysp' },
+  { match: /^[^,]*CCTV-5体育\(\d+\)/, alias: 'CCTV5', multi: true, maxLines: 3, preferContains: 'hlslive-tx-cdn.ysp', prepend: ['http://69.30.245.50/live/cctv5.m3u8'] },
   { match: /^[^,]*CCTV-5\+赛事\(\d+\)/, alias: 'CCTV5+', multi: true, maxLines: 3, preferContains: 'hlslive-tx-cdn.ysp' },
   { match: /^[^,]*ESPN体育频道\(1\)/, alias: 'ESPN' },
   { match: /^[^,]*Eurosport 1/, alias: 'Eurosport 1' },
@@ -169,7 +170,8 @@ async function probe(url, originHeader) {
 }
 
 async function pickMulti(allLines, wanted) {
-  const candidates = [];
+  const prepend = wanted.prepend || [];
+  const candidates = [...prepend];
   for (const line of allLines) {
     if (!wanted.match.test(line)) continue;
     const commaIdx = line.indexOf(',');
@@ -179,6 +181,9 @@ async function pickMulti(allLines, wanted) {
   if (candidates.length === 0) return [];
 
   candidates.sort((a, b) => {
+    const aPre = prepend.includes(a) ? 0 : 2;
+    const bPre = prepend.includes(b) ? 0 : 2;
+    if (aPre !== bPre) return aPre - bPre;
     const aPref = wanted.preferContains && a.includes(wanted.preferContains) ? 0 : 1;
     const bPref = wanted.preferContains && b.includes(wanted.preferContains) ? 0 : 1;
     return aPref - bPref;
@@ -292,7 +297,7 @@ function build({ aResults, bResults, bExtra, c9Lines, c13Lines, statics }) {
   const lines = [];
 
   lines.push('体育,#genre#');
-  for (const ch of aResults) lines.push(`${ch.name},${ch.url}${aSuffix}`);
+  for (const ch of aResults.filter(c => (c.group || '体育') === '体育')) lines.push(`${ch.name},${ch.url}${aSuffix}`);
   for (const ch of bResults) lines.push(`${ch.alias},${ch.url}${bSuffix}`);
 
   lines.push('央视,#genre#');
@@ -310,6 +315,12 @@ function build({ aResults, bResults, bExtra, c9Lines, c13Lines, statics }) {
   lines.push('港澳台,#genre#');
   for (const ch of statics.filter(c => c.alias.startsWith('凤凰'))) lines.push(`${ch.alias},${ch.url}`);
 
+  const jishi = aResults.filter(c => (c.group || '体育') === '纪实');
+  if (jishi.length) {
+    lines.push('纪实,#genre#');
+    for (const ch of jishi) lines.push(`${ch.name},${ch.url}${aSuffix}`);
+  }
+
   return lines.join('\n') + '\n';
 }
 
@@ -320,7 +331,7 @@ async function main() {
     try {
       const m3u8 = await fetchA(ch.id);
       console.error(`[ok] ${ch.name}: ${m3u8.slice(0, 80)}...`);
-      aResults.push({ name: ch.name, url: m3u8 });
+      aResults.push({ name: ch.name, url: m3u8, group: ch.group || '体育' });
     } catch (e) {
       console.error(`[fail] ${ch.name}: ${e.message}`);
     }
