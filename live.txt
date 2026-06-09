@@ -1,5 +1,5 @@
 体育,#genre#
-五星体育,https://volc-stream.kksmg.com/live/wxty/index.m3u8?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOiJsaXZlIiwiZG9tYWluIjoidm9sYy1zdHJlYW0ua2tzbWcuY29tIiwiZXhwIjoxNzgxMDc4NjM4LCJpYXQiOjE3ODEwMzU0MzgsIm5vbmNlIjoienRsYzFvNjEiLCJwbGF0Zm9ybSI6InBjIiwic3RyZWFtX25hbWUiOiJ3eHR5IiwidWFfaGFzaCI6ImtOcWxVV0JDYWR2Tnp5TjdYTWNBOHciLCJ1c2VyX2lkIjowLCJ1c2VyX2lwIjoiNTcuMTUxLjEzNy4xNTEiLCJ1dWlkIjoiV3BWU0JyMHZna0JoV3JOTXppbVFDIiwidmVyc2lvbiI6IjIuNDEuNiJ9.ZAHpA6bpwFiei9wxChOSCTivbk2ZZUxHRkax92KB_DY&volcSecret=16006c1e6fdaaacd4a942f96f40095ab&volcTime=1781078638|Referer=https://live.kankanews.com/&Origin=https://live.kankanews.com&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
+五星体育,https://volc-stream.kksmg.com/live/wxty/index.m3u8?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOiJsaXZlIiwiZG9tYWluIjoidm9sYy1zdHJlYW0ua2tzbWcuY29tIiwiZXhwIjoxNzgxMDc5NDUxLCJpYXQiOjE3ODEwMzYyNTEsIm5vbmNlIjoiN2VvbDlodmQiLCJwbGF0Zm9ybSI6InBjIiwic3RyZWFtX25hbWUiOiJ3eHR5IiwidWFfaGFzaCI6ImtOcWxVV0JDYWR2Tnp5TjdYTWNBOHciLCJ1c2VyX2lkIjowLCJ1c2VyX2lwIjoiMjAuMTA5Ljg2LjIyNyIsInV1aWQiOiJXcFZTQnIwdmdrQmhXck5NemltUUMiLCJ2ZXJzaW9uIjoiMi40MS42In0.65YH7ayqWh75APDGkqW-HoVhj54TCQ--MT1vbuG_5nI&volcSecret=5fa96b9e0170bfb51c459fddb5d7b818&volcTime=1781079451|Referer=https://live.kankanews.com/&Origin=https://live.kankanews.com&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
 CCTV5,http://69.30.245.50/live/cctv5.m3u8|Origin=https://yibababa.com
 CCTV5,https://timetv.fit/http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078401_dlna.m3u8|Origin=https://yibababa.com
 CCTV5,https://timetv.fit/http://43.175.97.11/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078401_dlna.m3u8|Origin=https://yibababa.com
@@ -7,6 +7,8 @@ CCTV5+,http://173.208.212.130:8181/1080p/cctv5p.m3u8|Origin=https://yibababa.com
 CCTV5+,http://207.56.13.146:81/cdnlive/cctv5p.m3u8|Origin=https://yibababa.com
 CCTV5+,https://timetv.fit/http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078001_dlna.m3u8|Origin=https://yibababa.com
 Eurosport 1,http://151.80.18.177:86/Eurosport_HD/index.m3u8
+ESPN,https://t.freetv.fun/live/espn.m3u8|User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
+ESPN2,https://t.freetv.fun/live/espn-2.m3u8|User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
 央视,#genre#
 CCTV9,http://74.91.26.218:82/live/cctv9hd.m3u8
 CCTV9,https://timetv.shop/http://74.91.26.218:82/live/cctv9hd.m3u8|Origin=https://yibababa.com
@@ -16,4 +18,4 @@ CCTV13,https://timetv.shop/http://74.91.26.218:82/live/cctv13hd.m3u8|Origin=http
 凤凰中文,http://cdn6.163189.xyz/163189/fhzw
 凤凰资讯,http://cdn6.163189.xyz/163189/fhzx
 纪实,#genre#
-新纪实,https://tencent-stream.kksmg.com/live/xjspd.m3u8?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOiJsaXZlIiwiZG9tYWluIjoidGVuY2VudC1zdHJlYW0ua2tzbWcuY29tIiwiZXhwIjoxNzgxMDc4NjM5LCJpYXQiOjE3ODEwMzU0MzksIm5vbmNlIjoiNHd0eWJqdTgiLCJwbGF0Zm9ybSI6InBjIiwic3RyZWFtX25hbWUiOiJ4anNwZCIsInVhX2hhc2giOiJrTnFsVVdCQ2Fkdk56eU43WE1jQTh3IiwidXNlcl9pZCI6MCwidXNlcl9pcCI6IjU3LjE1MS4xMzcuMTUxIiwidXVpZCI6IldwVlNCcjB2Z2tCaFdyTk16aW1RQyIsInZlcnNpb24iOiIyLjQxLjYifQ.LB5-rIGMjpEMxWjOxUFoeIP95gfdGWknHXXWLkKEHb4&txSecret=1bd559dd30af018670da3e865510b3a9&txTime=6a291a6f|Referer=https://live.kankanews.com/&Origin=https://live.kankanews.com&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
+新纪实,https://tencent-stream.kksmg.com/live/xjspd.m3u8?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOiJsaXZlIiwiZG9tYWluIjoidGVuY2VudC1zdHJlYW0ua2tzbWcuY29tIiwiZXhwIjoxNzgxMDc5NDUxLCJpYXQiOjE3ODEwMzYyNTEsIm5vbmNlIjoia2xmMGJzbTciLCJwbGF0Zm9ybSI6InBjIiwic3RyZWFtX25hbWUiOiJ4anNwZCIsInVhX2hhc2giOiJrTnFsVVdCQ2Fkdk56eU43WE1jQTh3IiwidXNlcl9pZCI6MCwidXNlcl9pcCI6IjIwLjEwOS44Ni4yMjciLCJ1dWlkIjoiV3BWU0JyMHZna0JoV3JOTXppbVFDIiwidmVyc2lvbiI6IjIuNDEuNiJ9.U8bvgx8q8nCc5JitJUrV5qSFQryyzGoeImhU6kc4jrs&txSecret=f40810510512b37d8205da980b0d30f8&txTime=6a291d9b|Referer=https://live.kankanews.com/&Origin=https://live.kankanews.com&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
