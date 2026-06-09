@@ -30,16 +30,23 @@ const SOURCE_A_HEADERS = {
 };
 
 // ---- source B ----
+// yibababa 2026-06 改版:(1) 频道名 "体育/赛事" 改成 "线路";(2) 所有 URL 都包了
+// 播放器壳 .../player/{tcplayer,dplayer,mpegts}/?url=<真URL> 或 cors-proxy.cooks.fyi/<真URL>,
+// 必须 unwrap() 剥壳才能拿到真实可播 URL;(3) ESPN/Eurosport 从 cctv5.txt 移到 sport.txt。
+// 故 SOURCE_B 拆成多 feed,每个 wanted 指明从哪个 feed 取。
 const SOURCE_B = {
-  TXT_URL: 'https://yibababa.com/tv/cctv5/cctv5.txt',
   ORIGIN: 'https://yibababa.com',
+  FEEDS: {
+    cctv5: 'https://yibababa.com/tv/cctv5/cctv5.txt',
+    sport: 'https://yibababa.com/tv/sport/sport.txt',
+  },
 };
 
 const SOURCE_B_WANTED = [
-  { match: /^[^,]*CCTV-5体育\(\d+\)/, alias: 'CCTV5', multi: true, maxLines: 3, preferContains: 'hlslive-tx-cdn.ysp', prepend: ['http://69.30.245.50/live/cctv5.m3u8'] },
-  { match: /^[^,]*CCTV-5\+赛事\(\d+\)/, alias: 'CCTV5+', multi: true, maxLines: 3, preferContains: 'hlslive-tx-cdn.ysp' },
-  { match: /^[^,]*ESPN体育频道\(1\)/, alias: 'ESPN' },
-  { match: /^[^,]*Eurosport 1/, alias: 'Eurosport 1' },
+  { feed: 'cctv5', match: /^[^,]*CCTV-5线路\(\d+\)/, alias: 'CCTV5', headers: { Origin: SOURCE_B.ORIGIN }, multi: true, maxLines: 3, preferContains: 'hlslive-tx-cdn.ysp', prepend: ['http://69.30.245.50/live/cctv5.m3u8'] },
+  { feed: 'cctv5', match: /^[^,]*CCTV-5\+线路\(\d+\)/, alias: 'CCTV5+', headers: { Origin: SOURCE_B.ORIGIN }, multi: true, maxLines: 3, preferContains: 'hlslive-tx-cdn.ysp' },
+  { feed: 'sport', match: /^Eurosport 1,/, alias: 'Eurosport 1', headers: {} },
+  // ESPN: yibababa 已删纯 ESPN,仅剩死的 "ESPN 2"(143.244.60.30 connection refused),暂撤,待新源
 ];
 
 const SOURCE_B_EXTRA = [];
@@ -169,6 +176,17 @@ async function probe(url, originHeader) {
   }
 }
 
+// 剥掉 yibababa 的播放器壳,拿到真实可播 URL:
+//   https://www.yibababa.com/player/tcplayer/?url=<real>  → <real>
+//   https://cors-proxy.cooks.fyi/<real>                   → <real>
+// 两层可能叠加(player 壳里再套 cors-proxy),顺序剥。裸 URL 原样返回。
+function unwrap(u) {
+  const m = u.match(/[?&]url=(.+)$/);
+  if (m) u = decodeURIComponent(m[1]);
+  u = u.replace(/^https?:\/\/cors-proxy\.cooks\.fyi\//i, '');
+  return u;
+}
+
 async function pickMulti(allLines, wanted) {
   const prepend = wanted.prepend || [];
   const candidates = [...prepend];
@@ -176,11 +194,14 @@ async function pickMulti(allLines, wanted) {
     if (!wanted.match.test(line)) continue;
     const commaIdx = line.indexOf(',');
     if (commaIdx < 0) continue;
-    candidates.push(line.slice(commaIdx + 1).trim());
+    candidates.push(unwrap(line.slice(commaIdx + 1).trim()));
   }
-  if (candidates.length === 0) return [];
+  // 去重:剥壳后不同壳可能指向同一真 URL(如 line4 cors-proxy 包的 69.30 == prepend)
+  const seen = new Set();
+  const uniq = candidates.filter(u => (seen.has(u) ? false : (seen.add(u), true)));
+  if (uniq.length === 0) return [];
 
-  candidates.sort((a, b) => {
+  uniq.sort((a, b) => {
     const aPre = prepend.includes(a) ? 0 : 2;
     const bPre = prepend.includes(b) ? 0 : 2;
     if (aPre !== bPre) return aPre - bPre;
@@ -190,7 +211,7 @@ async function pickMulti(allLines, wanted) {
   });
 
   const probed = await Promise.all(
-    candidates.map(async u => ({ url: u, alive: await probe(u, SOURCE_B.ORIGIN) }))
+    uniq.map(async u => ({ url: u, alive: await probe(u, SOURCE_B.ORIGIN) }))
   );
 
   const alive = probed.filter(r => r.alive).map(r => r.url);
@@ -204,21 +225,37 @@ async function pickMulti(allLines, wanted) {
     const ok = alive.includes(u);
     console.error(`[${wanted.alias}] ${ok ? 'ok  ' : 'dead'} ${u.slice(0, 90)}`);
   }
-  return picked.map(url => ({ alias: wanted.alias, url }));
+  return picked.map(url => ({ alias: wanted.alias, url, headers: wanted.headers || {} }));
 }
 
-async function fetchB() {
-  const resp = await fetch(SOURCE_B.TXT_URL, {
+async function fetchBFeed(name) {
+  const resp = await fetch(SOURCE_B.FEEDS[name], {
     headers: {
       'User-Agent': SOURCE_A_HEADERS['User-Agent'],
       'Accept': 'text/plain,*/*;q=0.9',
     },
   });
-  if (!resp.ok) throw new Error(`B HTTP ${resp.status}`);
-  const text = await resp.text();
-  const lines = text.split(/\r?\n/);
+  if (!resp.ok) throw new Error(`B feed ${name} HTTP ${resp.status}`);
+  return (await resp.text()).split(/\r?\n/);
+}
+
+async function fetchB() {
+  // 每个 feed 只拉一次;单个 feed 挂掉不连累其他频道(返回空行,multi 频道仍能用 prepend)
+  const feedCache = {};
+  async function getFeed(name) {
+    if (name in feedCache) return feedCache[name];
+    try {
+      feedCache[name] = await fetchBFeed(name);
+    } catch (e) {
+      console.error(`[warn] B feed ${name} failed: ${e.message}`);
+      feedCache[name] = [];
+    }
+    return feedCache[name];
+  }
+
   const out = [];
   for (const wanted of SOURCE_B_WANTED) {
+    const lines = await getFeed(wanted.feed);
     if (wanted.multi) {
       const picked = await pickMulti(lines, wanted);
       if (picked.length === 0) console.error(`[warn] no match for ${wanted.alias}`);
@@ -232,8 +269,8 @@ async function fetchB() {
     }
     const commaIdx = hit.indexOf(',');
     if (commaIdx < 0) continue;
-    const url = hit.slice(commaIdx + 1).trim();
-    out.push({ alias: wanted.alias, url });
+    const url = unwrap(hit.slice(commaIdx + 1).trim());
+    out.push({ alias: wanted.alias, url, headers: wanted.headers || {} });
   }
   return out;
 }
@@ -298,7 +335,10 @@ function build({ aResults, bResults, bExtra, c9Lines, c13Lines, statics }) {
 
   lines.push('体育,#genre#');
   for (const ch of aResults.filter(c => (c.group || '体育') === '体育')) lines.push(`${ch.name},${ch.url}${aSuffix}`);
-  for (const ch of bResults) lines.push(`${ch.alias},${ch.url}${bSuffix}`);
+  for (const ch of bResults) {
+    const s = ch.headers && Object.keys(ch.headers).length > 0 ? suffix(ch.headers) : '';
+    lines.push(`${ch.alias},${ch.url}${s}`);
+  }
 
   lines.push('央视,#genre#');
   for (const ch of bExtra) lines.push(`${ch.alias},${ch.url}${bSuffix}`);
