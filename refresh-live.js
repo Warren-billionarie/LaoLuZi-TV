@@ -78,6 +78,12 @@ const STATIC_CHANNELS = [
   { alias: '凤凰资讯', url: 'http://cdn6.163189.xyz/163189/fhzx' },
 ];
 
+// 体育组静态频道(非 yibababa,Cloudflare 前置,带 UA)
+const STATIC_SPORTS = [
+  { alias: 'ESPN', url: 'https://t.freetv.fun/live/espn.m3u8', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
+  { alias: 'ESPN2', url: 'https://t.freetv.fun/live/espn-2.m3u8', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
+];
+
 // ============================================================
 
 function md5(s) {
@@ -336,6 +342,10 @@ function build({ aResults, bResults, bExtra, c9Lines, c13Lines, statics }) {
   lines.push('体育,#genre#');
   for (const ch of aResults.filter(c => (c.group || '体育') === '体育')) lines.push(`${ch.name},${ch.url}${aSuffix}`);
   for (const ch of bResults) {
+    const s = ch.headers && Object.keys(ch.headers).length > 0 ? suffix(ch.headers) : '';
+    lines.push(`${ch.alias},${ch.url}${s}`);
+  }
+  for (const ch of STATIC_SPORTS) {
     const s = ch.headers && Object.keys(ch.headers).length > 0 ? suffix(ch.headers) : '';
     lines.push(`${ch.alias},${ch.url}${s}`);
   }
