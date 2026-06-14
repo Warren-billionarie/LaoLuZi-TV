@@ -1,5 +1,4 @@
 体育,#genre#
-五星体育,https://volc-stream.kksmg.com/live/wxty/index.m3u8?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOiJsaXZlIiwiZG9tYWluIjoidm9sYy1zdHJlYW0ua2tzbWcuY29tIiwiZXhwIjoxNzgxNDUxNjQ1LCJpYXQiOjE3ODE0MDg0NDUsIm5vbmNlIjoiMnpkOWdpZm0iLCJwbGF0Zm9ybSI6InBjIiwic3RyZWFtX25hbWUiOiJ3eHR5IiwidWFfaGFzaCI6ImtOcWxVV0JDYWR2Tnp5TjdYTWNBOHciLCJ1c2VyX2lkIjowLCJ1c2VyX2lwIjoiNTIuMTkwLjE4My44MSIsInV1aWQiOiJXcFZTQnIwdmdrQmhXck5NemltUUMiLCJ2ZXJzaW9uIjoiMi40MS42In0.5ekIczMhIkAumUDZFxQlGrsq2KCM-NAx3txilaq0VKU&volcSecret=30e93c3b27baa442515b2d67ef85ebbb&volcTime=1781451645|Referer=https://live.kankanews.com/&Origin=https://live.kankanews.com&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
 CCTV5,http://69.30.245.50/live/cctv5.m3u8|Origin=https://yibababa.com
 CCTV5,https://timetv.fit/http://43.175.97.11/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078401_dlna.m3u8|Origin=https://yibababa.com
 CCTV5,https://timetv.shop/http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078401_dlna.m3u8|Origin=https://yibababa.com
@@ -17,5 +16,3 @@ CCTV13,https://timetv.shop/http://74.91.26.218:82/live/cctv13hd.m3u8|Origin=http
 港澳台,#genre#
 凤凰中文,http://cdn6.163189.xyz/163189/fhzw
 凤凰资讯,http://cdn6.163189.xyz/163189/fhzx
-纪实,#genre#
-新纪实,https://tencent-stream.kksmg.com/live/xjspd.m3u8?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOiJsaXZlIiwiZG9tYWluIjoidGVuY2VudC1zdHJlYW0ua2tzbWcuY29tIiwiZXhwIjoxNzgxNDUxNjQ1LCJpYXQiOjE3ODE0MDg0NDYsIm5vbmNlIjoiOG9lZW5ya2wiLCJwbGF0Zm9ybSI6InBjIiwic3RyZWFtX25hbWUiOiJ4anNwZCIsInVhX2hhc2giOiJrTnFsVVdCQ2Fkdk56eU43WE1jQTh3IiwidXNlcl9pZCI6MCwidXNlcl9pcCI6IjUyLjE5MC4xODMuODEiLCJ1dWlkIjoiV3BWU0JyMHZna0JoV3JOTXppbVFDIiwidmVyc2lvbiI6IjIuNDEuNiJ9.51lcV9Mlw76H76GXA8WyfP_fBNPVHdiVwxiAMA7sTUE&txSecret=b7d16e46bde915d5339031852fd7df29&txTime=6a2ecb7e|Referer=https://live.kankanews.com/&Origin=https://live.kankanews.com&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
