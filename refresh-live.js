@@ -376,15 +376,12 @@ function build({ aResults, bResults, bExtra, c9Lines, c13Lines, statics }) {
 
 async function main() {
   console.error('[info] A...');
+  // token 现由 App 端 kankan:// extractor 在播放设备上实时获取(火山 CDN 按 token 内
+  // user_ip 放行,runner IP 取的 token 电视用不了 → 403),这里只输出静态 kankan://<id> 入口。
   const aResults = [];
   for (const ch of SOURCE_A_CHANNELS) {
-    try {
-      const m3u8 = await fetchA(ch.id);
-      console.error(`[ok] ${ch.name}: ${m3u8.slice(0, 80)}...`);
-      aResults.push({ name: ch.name, url: m3u8, group: ch.group || '体育' });
-    } catch (e) {
-      console.error(`[fail] ${ch.name}: ${e.message}`);
-    }
+    aResults.push({ name: ch.name, url: 'kankan://' + ch.id, group: ch.group || '体育' });
+    console.error(`[ok] ${ch.name}: kankan://${ch.id}`);
   }
 
   console.error('[info] B...');

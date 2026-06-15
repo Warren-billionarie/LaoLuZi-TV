@@ -1,5 +1,5 @@
 体育,#genre#
-五星体育,https://volc-stream.kksmg.com/live/wxty/index.m3u8?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOiJsaXZlIiwiZG9tYWluIjoidm9sYy1zdHJlYW0ua2tzbWcuY29tIiwiZXhwIjoxNzgxNTA4MTExLCJpYXQiOjE3ODE0NjQ5MTEsIm5vbmNlIjoiY210anl2MWYiLCJwbGF0Zm9ybSI6InBjIiwic3RyZWFtX25hbWUiOiJ3eHR5IiwidWFfaGFzaCI6ImtOcWxVV0JDYWR2Tnp5TjdYTWNBOHciLCJ1c2VyX2lkIjowLCJ1c2VyX2lwIjoiMTQ1LjEzMi45OS4xOSIsInV1aWQiOiJXcFZTQnIwdmdrQmhXck5NemltUUMiLCJ2ZXJzaW9uIjoiMi40MS42In0.Kqd_z26CHk8idZ7-rTjOJhiMLYYwzGZWe7xkQLHmJ6I&volcSecret=1af165fc1291bf23470da80023627687&volcTime=1781508111|Referer=https://live.kankanews.com/&Origin=https://live.kankanews.com&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
+五星体育,kankan://10|Referer=https://live.kankanews.com/&Origin=https://live.kankanews.com&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
 CCTV5,http://69.30.245.50/live/cctv5.m3u8|Origin=https://yibababa.com
 CCTV5,https://timetv.fit/http://43.175.97.11/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078401_dlna.m3u8|Origin=https://yibababa.com
 CCTV5,https://timetv.shop/http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078401_dlna.m3u8|Origin=https://yibababa.com
@@ -18,4 +18,4 @@ CCTV13,https://timetv.shop/http://74.91.26.218:82/live/cctv13hd.m3u8|Origin=http
 凤凰中文,http://cdn6.163189.xyz/163189/fhzw
 凤凰资讯,http://cdn6.163189.xyz/163189/fhzx
 纪实,#genre#
-新纪实,https://tencent-stream.kksmg.com/live/xjspd.m3u8?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOiJsaXZlIiwiZG9tYWluIjoidGVuY2VudC1zdHJlYW0ua2tzbWcuY29tIiwiZXhwIjoxNzgxNTA4MTExLCJpYXQiOjE3ODE0NjQ5MTIsIm5vbmNlIjoiZTM2NmZzdnMiLCJwbGF0Zm9ybSI6InBjIiwic3RyZWFtX25hbWUiOiJ4anNwZCIsInVhX2hhc2giOiJrTnFsVVdCQ2Fkdk56eU43WE1jQTh3IiwidXNlcl9pZCI6MCwidXNlcl9pcCI6IjE0NS4xMzIuOTkuMTkiLCJ1dWlkIjoiV3BWU0JyMHZna0JoV3JOTXppbVFDIiwidmVyc2lvbiI6IjIuNDEuNiJ9.e8GGpByApnOfMfEwY2oLdFT-E5UOba8W35YIlFb3mq8&txSecret=47ff0c4d3eb4f6ba931125459e642073&txTime=6a2fa810|Referer=https://live.kankanews.com/&Origin=https://live.kankanews.com&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
+新纪实,kankan://12|Referer=https://live.kankanews.com/&Origin=https://live.kankanews.com&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
