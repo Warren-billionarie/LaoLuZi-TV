@@ -3,9 +3,9 @@
 CCTV5,http://69.30.245.50/live/cctv5.m3u8|Origin=https://yibababa.com
 CCTV5,https://timetv.fit/http://43.175.97.11/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078401_dlna.m3u8|Origin=https://yibababa.com
 CCTV5,https://timetv.shop/http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078401_dlna.m3u8|Origin=https://yibababa.com
-CCTV5+,http://173.208.212.130:8181/1080p/cctv5p.m3u8|Origin=https://yibababa.com
 CCTV5+,http://207.56.13.146:81/cdnlive/cctv5p.m3u8|Origin=https://yibababa.com
 CCTV5+,https://timetv.shop/http://43.175.97.11/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078001_dlna.m3u8|Origin=https://yibababa.com
+CCTV5+,https://timetv.fit/http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078001_dlna.m3u8|Origin=https://yibababa.com
 Eurosport 1,http://151.80.18.177:86/Eurosport_HD/index.m3u8
 ESPN,https://t.freetv.fun/live/espn.m3u8|User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
 ESPN2,https://t.freetv.fun/live/espn-2.m3u8|User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
