@@ -43,7 +43,7 @@ const SOURCE_B = {
 };
 
 const SOURCE_B_WANTED = [
-  { feed: 'cctv5', match: /^[^,]*CCTV-5线路\(\d+\)/, alias: 'CCTV5', headers: { Origin: SOURCE_B.ORIGIN }, multi: true, maxLines: 3, preferContains: 'hlslive-tx-cdn.ysp', prepend: ['http://69.30.245.50/live/cctv5.m3u8'] },
+  { feed: 'cctv5', match: /^[^,]*CCTV-5线路\(\d+\)/, alias: 'CCTV5', headers: { Origin: SOURCE_B.ORIGIN }, multi: true, maxLines: 5, preferContains: 'hlslive-tx-cdn.ysp', prepend: ['http://69.30.245.50/live/cctv5.m3u8', 'http://38.75.136.137:98/gslb/dsdqbv/cctv5hd.m3u8?auth=test20251009', 'http://74.91.26.218:82/live/cctv5hd.m3u8'] },
   { feed: 'cctv5', match: /^[^,]*CCTV-5\+线路\(\d+\)/, alias: 'CCTV5+', headers: { Origin: SOURCE_B.ORIGIN }, multi: true, maxLines: 3, preferContains: 'hlslive-tx-cdn.ysp', prepend: ['http://173.208.212.130:8181/1080p/cctv5p.m3u8', 'http://207.56.13.146:81/cdnlive/cctv5p.m3u8'] },
   { feed: 'sport', match: /^Eurosport 1,/, alias: 'Eurosport 1', headers: {} },
   // ESPN: yibababa 已删纯 ESPN,仅剩死的 "ESPN 2"(143.244.60.30 connection refused),暂撤,待新源
