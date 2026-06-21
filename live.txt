@@ -4,9 +4,9 @@
 五星体育,https://cdn15.163189.xyz/163189/wxty
 CCTV5,http://69.30.245.50/live/cctv5.m3u8|Origin=https://yibababa.com
 CCTV5,http://38.75.136.137:98/gslb/dsdqbv/cctv5hd.m3u8?auth=test20251009|Origin=https://yibababa.com
+CCTV5,https://timetv.fit/http://43.175.97.11/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078401_dlna.m3u8|Origin=https://yibababa.com
 CCTV5,https://timetv.shop/http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078401_dlna.m3u8|Origin=https://yibababa.com
 CCTV5,https://cdn16.163189.xyz/163189/cctv5|Origin=https://yibababa.com
-CCTV5,https://php.jdshipin.com:2096/TVOD/iptv.php?id=cctv5|Origin=https://yibababa.com
 CCTV5,https://live.264788.xyz/channel/cctv5?livekey=01Wb7kjxu1xx2f7s4tcqSAF03RfwBkY7h8Nz2|User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
 CCTV5+,https://live.264788.xyz/channel/cctv5p?livekey=01Wb7kjxu1xx2f7s4tcqSAF03RfwBkY7h8Nz2|User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
 CCTV5+,http://207.56.13.146:81/cdnlive/cctv5p.m3u8|Origin=https://yibababa.com
