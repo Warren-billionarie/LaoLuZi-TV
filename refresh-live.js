@@ -43,7 +43,7 @@ const SOURCE_B = {
 };
 
 const SOURCE_B_WANTED = [
-  { feed: 'cctv5', match: /^[^,]*CCTV-5线路\(\d+\)/, alias: 'CCTV5', headers: { Origin: SOURCE_B.ORIGIN }, multi: true, maxLines: 5, preferContains: 'hlslive-tx-cdn.ysp', prepend: ['http://69.30.245.50/live/cctv5.m3u8', 'http://38.75.136.137:98/gslb/dsdqbv/cctv5hd.m3u8?auth=test20251009', 'http://74.91.26.218:82/live/cctv5hd.m3u8'] },
+  { feed: 'cctv5', match: /^[^,]*CCTV-5线路\(\d+\)/, alias: 'CCTV5', headers: { Origin: SOURCE_B.ORIGIN }, multi: true, maxLines: 5, preferContains: 'hlslive-tx-cdn.ysp', prepend: ['http://69.30.245.50/live/cctv5.m3u8', 'http://38.75.136.137:98/gslb/dsdqbv/cctv5hd.m3u8?auth=test20251009'] },
   { feed: 'cctv5', match: /^[^,]*CCTV-5\+线路\(\d+\)/, alias: 'CCTV5+', headers: { Origin: SOURCE_B.ORIGIN }, multi: true, maxLines: 3, preferContains: 'hlslive-tx-cdn.ysp', prepend: ['http://173.208.212.130:8181/1080p/cctv5p.m3u8', 'http://207.56.13.146:81/cdnlive/cctv5p.m3u8'] },
   { feed: 'sport', match: /^Eurosport 1,/, alias: 'Eurosport 1', headers: {} },
   // ESPN: yibababa 已删纯 ESPN,仅剩死的 "ESPN 2"(143.244.60.30 connection refused),暂撤,待新源
@@ -77,6 +77,14 @@ const WX_FALLBACKS = [
   { url: 'https://cdn15.163189.xyz/163189/wxty', headers: {} },
 ];
 
+const C5_FALLBACKS = [
+  { url: 'https://live.264788.xyz/channel/cctv5?livekey=01Wb7kjxu1xx2f7s4tcqSAF03RfwBkY7h8Nz2', headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36' } },
+];
+
+const C5P_FALLBACKS = [
+  { url: 'https://live.264788.xyz/channel/cctv5p?livekey=01Wb7kjxu1xx2f7s4tcqSAF03RfwBkY7h8Nz2', headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36' } },
+];
+
 // ---- static ----
 const STATIC_CHANNELS = [
   { alias: '凤凰中文', url: 'http://cdn6.163189.xyz/163189/fhzw' },
@@ -86,7 +94,6 @@ const STATIC_CHANNELS = [
 // 体育组静态频道(非 yibababa,Cloudflare 前置,带 UA)
 const STATIC_SPORTS = [
   { alias: 'ESPN', url: 'https://t.freetv.fun/live/espn.m3u8', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
-  { alias: 'ESPN2', url: 'https://t.freetv.fun/live/espn-2.m3u8', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
 ];
 
 // ============================================================
@@ -350,7 +357,17 @@ function build({ aResults, bResults, bExtra, c9Lines, c13Lines, statics }) {
     const s = fb.headers && Object.keys(fb.headers).length > 0 ? suffix(fb.headers) : '';
     lines.push(`五星体育,${fb.url}${s}`);
   }
-  for (const ch of bResults) {
+  for (const ch of bResults.filter(c => c.alias === 'CCTV5')) {
+    const s = ch.headers && Object.keys(ch.headers).length > 0 ? suffix(ch.headers) : '';
+    lines.push(`${ch.alias},${ch.url}${s}`);
+  }
+  for (const fb of C5_FALLBACKS) lines.push(`CCTV5,${fb.url}${suffix(fb.headers)}`);
+  for (const fb of C5P_FALLBACKS) lines.push(`CCTV5+,${fb.url}${suffix(fb.headers)}`);
+  for (const ch of bResults.filter(c => c.alias === 'CCTV5+')) {
+    const s = ch.headers && Object.keys(ch.headers).length > 0 ? suffix(ch.headers) : '';
+    lines.push(`${ch.alias},${ch.url}${s}`);
+  }
+  for (const ch of bResults.filter(c => c.alias !== 'CCTV5' && c.alias !== 'CCTV5+')) {
     const s = ch.headers && Object.keys(ch.headers).length > 0 ? suffix(ch.headers) : '';
     lines.push(`${ch.alias},${ch.url}${s}`);
   }
