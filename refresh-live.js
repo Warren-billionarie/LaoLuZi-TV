@@ -85,6 +85,10 @@ const C5P_FALLBACKS = [
   { url: 'https://live.264788.xyz/channel/cctv5p?livekey=01Wb7kjxu1xx2f7s4tcqSAF03RfwBkY7h8Nz2', headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36' } },
 ];
 
+const JISHI_EXTRA = [
+  { name: '东方卫视', url: 'https://live.264788.xyz/channel/dongfangweishi?livekey=01Wb7kjxu1xx2f7s4tcqSAF03RfwBkY7h8Nz2', headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36' } },
+];
+
 // ---- static ----
 const STATIC_CHANNELS = [
   { alias: '凤凰中文', url: 'http://cdn6.163189.xyz/163189/fhzw' },
@@ -392,10 +396,12 @@ function build({ aResults, bResults, bExtra, c9Lines, c13Lines, statics }) {
   for (const ch of statics.filter(c => c.alias.startsWith('凤凰'))) lines.push(`${ch.alias},${ch.url}`);
 
   const jishi = aResults.filter(c => (c.group || '体育') === '纪实');
-  if (jishi.length) {
+  if (jishi.length || JISHI_EXTRA.length) {
     lines.push('纪实,#genre#');
     for (const ch of jishi) lines.push(`${ch.name},${ch.url}${aSuffix}`);
+    for (const ch of JISHI_EXTRA) lines.push(`${ch.name},${ch.url}${suffix(ch.headers)}`);
   }
+
 
   return lines.join('\n') + '\n';
 }
