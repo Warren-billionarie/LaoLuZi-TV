@@ -72,6 +72,10 @@ const C13_FALLBACKS = [
   { url: 'https://timetv.shop/http://74.91.26.218:82/live/cctv13hd.m3u8', headers: { Origin: 'https://yibababa.com' } },
 ];
 
+const WX_FALLBACKS = [
+  { url: 'https://live.264788.xyz/channel/wuxingtiyu?livekey=01Wb7kjxu1xx2f7s4tcqSAF03RfwBkY7h8Nz2', headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36' } },
+];
+
 // ---- static ----
 const STATIC_CHANNELS = [
   { alias: '凤凰中文', url: 'http://cdn6.163189.xyz/163189/fhzw' },
@@ -341,6 +345,7 @@ function build({ aResults, bResults, bExtra, c9Lines, c13Lines, statics }) {
 
   lines.push('体育,#genre#');
   for (const ch of aResults.filter(c => (c.group || '体育') === '体育')) lines.push(`${ch.name},${ch.url}${aSuffix}`);
+  for (const fb of WX_FALLBACKS) lines.push(`五星体育,${fb.url}${suffix(fb.headers)}`);
   for (const ch of bResults) {
     const s = ch.headers && Object.keys(ch.headers).length > 0 ? suffix(ch.headers) : '';
     lines.push(`${ch.alias},${ch.url}${s}`);
