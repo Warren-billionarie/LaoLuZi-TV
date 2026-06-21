@@ -88,7 +88,6 @@ const C5P_FALLBACKS = [
 const JISHI_EXTRA = [
   { name: '东方卫视', url: 'https://live.264788.xyz/channel/dongfangweishi?livekey=01Wb7kjxu1xx2f7s4tcqSAF03RfwBkY7h8Nz2', headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36' } },
   { name: '东方卫视', url: 'http://173.208.212.130:8181/720p/dfws.m3u8', headers: {} },
-  { name: '东方卫视', url: 'https://txmov2.a.kwimgs.com/bs3/video-hls/5219953535631090825_hlsb.m3u8', headers: {} },
 ];
 
 // ---- static ----
