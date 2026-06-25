@@ -43,8 +43,7 @@ const SOURCE_B = {
 };
 
 const SOURCE_B_WANTED = [
-  { feed: 'cctv5', match: /^[^,]*CCTV-5线路\(\d+\)/, alias: 'CCTV5', headers: { Origin: SOURCE_B.ORIGIN }, multi: true, maxLines: 5, preferContains: 'hlslive-tx-cdn.ysp', prepend: ['http://69.30.245.50/live/cctv5.m3u8', 'http://38.75.136.137:98/gslb/dsdqbv/cctv5hd.m3u8?auth=test20251009'] },
-  { feed: 'cctv5', match: /^[^,]*CCTV-5\+线路\(\d+\)/, alias: 'CCTV5+', headers: { Origin: SOURCE_B.ORIGIN }, multi: true, maxLines: 3, preferContains: 'hlslive-tx-cdn.ysp', prepend: ['http://173.208.212.130:8181/1080p/cctv5p.m3u8', 'http://207.56.13.146:81/cdnlive/cctv5p.m3u8'] },
+  // CCTV5 / CCTV5+ 均不再走 yibababa feed 探活,改为下方 C5_FALLBACKS / C5P_FALLBACKS 全显式列源(精确控制线路顺序)
   { feed: 'sport', match: /^Eurosport 1,/, alias: 'Eurosport 1', headers: {} },
   // ESPN: yibababa 已删纯 ESPN,仅剩死的 "ESPN 2"(143.244.60.30 connection refused),暂撤,待新源
 ];
@@ -77,12 +76,30 @@ const WX_FALLBACKS = [
   { url: 'https://cdn15.163189.xyz/163189/wxty', headers: {} },
 ];
 
+// CCTV5 全显式 5 条线路(顺序即播放优先级,2026-06-25 实测重排):
 const C5_FALLBACKS = [
-  { url: 'https://live.264788.xyz/channel/cctv5?livekey=01Wb7kjxu1xx2f7s4tcqSAF03RfwBkY7h8Nz2', headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36' } },
+  // 1) 美国堪萨斯城直连 1080p,无 key/无 token —— 主力(0.14s,std 31)
+  { url: 'http://69.30.245.50/live/cctv5.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
+  // 2) 163189 CF 前置,叔叔家蜂窝网友好(真 TS 伪装成 image/jpeg,魔数 0x47)
+  { url: 'https://cdn16.163189.xyz/163189/cctv5', headers: { Origin: SOURCE_B.ORIGIN } },
+  // 3) darwin 高码率后端(streamid=...1187 → ch...1187,8Mbps≈1080p),CF 前置,叔叔家友好;依赖免费 livekey
+  { url: 'https://live.264788.xyz/channel/cctv5?streamid=188da934b8ba25977f0ac6a59478a16b&livekey=01Wb7kjxu1xx2f7s4tcqSAF03RfwBkY7h8Nz2', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
+  // 4) ysp 直连 2024078403 真 1080p;跨太平洋首屏略慢(open~6.4s),1080p 兜底
+  { url: 'http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078403_dlna.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
+  // 5) ysp 540p 经 timetv 反代,低带宽末线兜底
+  { url: 'https://timetv.shop/http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078401_dlna.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
 ];
 
+// CCTV5+ 全显式 4 条线路(顺序即播放优先级,2026-06-25 实测重排):
 const C5P_FALLBACKS = [
-  { url: 'https://live.264788.xyz/channel/cctv5p?livekey=01Wb7kjxu1xx2f7s4tcqSAF03RfwBkY7h8Nz2', headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36' } },
+  // 1) darwin cctv5p 1080p,CF 前置,叔叔家友好;依赖免费 livekey(备用 key: 01WgOR41rriMmMkzNsd0UoaxJRwetZdxIvtVk)
+  { url: 'https://live.264788.xyz/channel/cctv5p?livekey=01Wb7kjxu1xx2f7s4tcqSAF03RfwBkY7h8Nz2', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
+  // 2) 加拿大 720p(302→69.197.149.218)
+  { url: 'http://207.56.13.146:81/cdnlive/cctv5p.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
+  // 3) 163189 CF 前置 1080p,无 key,叔叔家友好(真 TS 伪装成 image/jpeg,魔数 0x47)
+  { url: 'https://cdn16.163189.xyz/163189/cctv5p', headers: { Origin: SOURCE_B.ORIGIN } },
+  // 4) ysp 直连 540p(2024078001),低带宽末线兜底
+  { url: 'http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078001_dlna.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
 ];
 
 const JISHI_EXTRA = [
