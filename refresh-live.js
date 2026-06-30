@@ -71,10 +71,12 @@ const C13_FALLBACKS = [
   { url: 'https://timetv.shop/http://74.91.26.218:82/live/cctv13hd.m3u8', headers: { Origin: 'https://yibababa.com' } },
 ];
 
-const WX_FALLBACKS = [
-  { url: 'https://live.264788.xyz/channel/wuxingtiyu?livekey=01Wb7kjxu1xx2f7s4tcqSAF03RfwBkY7h8Nz2', headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36' } },
-  { url: 'https://cdn15.163189.xyz/163189/wxty', headers: {} },
+// 主力线路1(.php 壳返回 master,内指 cdn15.163189/wxty,实测可播);kankan://10 降为线路2
+const WX_PRIMARY = [
+  { url: 'https://cdn.qd.je/163189.php?id=wxty', headers: {} },
+  { url: 'http://180.165.12.42:50001/tsfile/live/0001_41.m3u8?key=txiptv&playlive=1&authid=0', headers: {} },
 ];
+const WX_FALLBACKS = [];
 
 // CCTV5 全显式 6 条线路(顺序即播放优先级,2026-06-25 实测重排;2026-06-30 加线路6):
 const C5_FALLBACKS = [
@@ -376,6 +378,10 @@ function build({ aResults, bResults, bExtra, c9Lines, c13Lines, statics }) {
   const lines = [];
 
   lines.push('体育,#genre#');
+  for (const fb of WX_PRIMARY) {
+    const s = fb.headers && Object.keys(fb.headers).length > 0 ? suffix(fb.headers) : '';
+    lines.push(`五星体育,${fb.url}${s}`);
+  }
   for (const ch of aResults.filter(c => (c.group || '体育') === '体育')) lines.push(`${ch.name},${ch.url}${aSuffix}`);
   for (const fb of WX_FALLBACKS) {
     const s = fb.headers && Object.keys(fb.headers).length > 0 ? suffix(fb.headers) : '';
