@@ -76,7 +76,7 @@ const WX_FALLBACKS = [
   { url: 'https://cdn15.163189.xyz/163189/wxty', headers: {} },
 ];
 
-// CCTV5 全显式 5 条线路(顺序即播放优先级,2026-06-25 实测重排):
+// CCTV5 全显式 6 条线路(顺序即播放优先级,2026-06-25 实测重排;2026-06-30 加线路6):
 const C5_FALLBACKS = [
   // 1) 美国堪萨斯城直连 1080p,无 key/无 token —— 主力(0.14s,std 31)
   { url: 'http://69.30.245.50/live/cctv5.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
@@ -88,6 +88,8 @@ const C5_FALLBACKS = [
   { url: 'http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078403_dlna.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
   // 5) ysp 540p 经 timetv 反代,低带宽末线兜底
   { url: 'https://timetv.shop/http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078401_dlna.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
+  // 6) 163189 第二路 CCTV5(cctv5-2,1080p25 ~9Mbps,CF 无 key,US 友好,实测余量 13x;与线路2同 CDN 不同 feed key。cdn.qd.je 套壳实为此直链,用直链省一跳)
+  { url: 'https://cdn16.163189.xyz/163189/cctv5-2', headers: { Origin: SOURCE_B.ORIGIN } },
 ];
 
 // CCTV5+ 全显式 4 条线路(顺序即播放优先级,2026-06-25 实测重排):
