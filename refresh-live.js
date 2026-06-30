@@ -126,6 +126,14 @@ const STATIC_SPORTS = [
   { alias: '富士体育', url: 'https://fujitv4.mov3.co/hls/fujitv.m3u8', headers: {} },
 ];
 
+// 电影组静态频道
+const STATIC_MOVIES = [
+  // 经典电影:咪咕跳转器(302→miguvideo H.264 ~2Mbps),每请求现签 token(存跳转器 URL,L2/L3 reload 自愈)。中国移动 host,US 实测 .ts 392KB/s≈1.5x 余量够播,随时段波动
+  { alias: '经典电影', url: 'http://wfenf.x3322.net:7788/625703337', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
+  // 动作电影(CHC动作):302→69.30.245.194 美国堪萨斯城 WholeSale(同 CCTV5 主线机房群),US 实测 .ts 2.2MB/s 余量大
+  { alias: '动作电影', url: 'http://192.151.150.154/live/chcdz.m3u8', headers: {} },
+];
+
 // ============================================================
 
 function md5(s) {
@@ -435,6 +443,13 @@ function build({ aResults, bResults, bExtra, c9Lines, c13Lines, statics }) {
     }
   }
 
+  if (STATIC_MOVIES.length) {
+    lines.push('电影,#genre#');
+    for (const ch of STATIC_MOVIES) {
+      const s = ch.headers && Object.keys(ch.headers).length > 0 ? suffix(ch.headers) : '';
+      lines.push(`${ch.alias},${ch.url}${s}`);
+    }
+  }
 
   return lines.join('\n') + '\n';
 }
