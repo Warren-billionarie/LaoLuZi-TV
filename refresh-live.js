@@ -122,6 +122,8 @@ const STATIC_CHANNELS = [
 // 体育组静态频道(非 yibababa,Cloudflare 前置,带 UA)
 const STATIC_SPORTS = [
   { alias: 'ESPN', url: 'https://t.freetv.fun/live/espn.m3u8', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
+  // 富士体育:美国 Buffalo host(HostPapa),真直播 5s 分片,用户实测可播
+  { alias: '富士体育', url: 'https://fujitv4.mov3.co/hls/fujitv.m3u8', headers: {} },
 ];
 
 // ============================================================
