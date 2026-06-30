@@ -132,6 +132,8 @@ const STATIC_MOVIES = [
   { alias: '经典电影', url: 'http://wfenf.x3322.net:7788/625703337', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
   // 动作电影(CHC动作):302→69.30.245.194 美国堪萨斯城 WholeSale(同 CCTV5 主线机房群),US 实测 .ts 2.2MB/s 余量大
   { alias: '动作电影', url: 'http://192.151.150.154/live/chcdz.m3u8', headers: {} },
+  // 周星驰电影:302→198.204.228.26 美国堪萨斯城 Nocix(zbdq 源站家族,同动作电影),US 实测 .ts 5.5MB/s 余量大
+  { alias: '周星驰电影', url: 'http://198.204.228.26/live/lbzxc.m3u8', headers: {} },
 ];
 
 // ============================================================
