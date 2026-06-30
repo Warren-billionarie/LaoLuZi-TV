@@ -92,6 +92,8 @@ const C5_FALLBACKS = [
   { url: 'https://timetv.shop/http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078401_dlna.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
   // 6) 163189 第二路 CCTV5(cctv5-2,1080p25 ~9Mbps,CF 无 key,US 友好,实测余量 13x;与线路2同 CDN 不同 feed key。cdn.qd.je 套壳实为此直链,用直链省一跳)
   { url: 'https://cdn16.163189.xyz/163189/cctv5-2', headers: { Origin: SOURCE_B.ORIGIN } },
+  // 7) 咪咕跳转器 mg.cttv.vip(302→miguvideo H.265 ~2Mbps),每请求现签 token(存跳转器 URL,L2/L3 reload 自愈)。中国移动 host,US 实测 .ts 476KB/s≈1.7x 余量够播;速度随时段波动,末位兜底
+  { url: 'http://mg.cttv.vip/641886683', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
 ];
 
 // CCTV5+ 全显式 4 条线路(顺序即播放优先级,2026-06-25 实测重排):
