@@ -71,10 +71,10 @@ const C13_FALLBACKS = [
   { url: 'https://timetv.shop/http://74.91.26.218:82/live/cctv13hd.m3u8', headers: { Origin: 'https://yibababa.com' } },
 ];
 
-// 线路1 txiptv 直连(2026-07-01 实测 1080p std68.9 真五星 ONE 搏击,首响0.44s ~10Mbps 余量1.15x);线路2 .php 壳(内指 cdn15.163189/wxty);kankan://10 为线路3
+// 五星体育线路(2026-07-01 重排,VLC 实测均流畅):线路1 163189 直链(cdn15,秒开1080p ~210Mbps 余量25x,无key无header,蜂窝网也能播);线路2 darwin(CF独立CDN 1080p ~92Mbps,靠免费livekey,蜂窝网也能播);线路3 kankan://10(火山,仅住宅固网,App端实时取token)。删:139.227(中国联通,美国12s超时死线)、cdn.qd.je壳(永远只指cdn15,多一跳,用直链替代)
 const WX_PRIMARY = [
-  { url: 'http://139.227.21.22:9901/tsfile/live/1010_1.m3u8?key=txiptv', headers: {} },
-  { url: 'https://cdn.qd.je/163189.php?id=wxty', headers: {} },
+  { url: 'https://cdn15.163189.xyz/163189/wxty', headers: {} },
+  { url: 'https://live.264788.xyz/channel/wuxingtiyu?livekey=01Wb7kjxu1xx2f7s4tcqSAF03RfwBkY7h8Nz2', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
 ];
 const WX_FALLBACKS = [];
 
