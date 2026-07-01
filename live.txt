@@ -1,6 +1,6 @@
 体育,#genre#
+五星体育,http://139.227.21.22:9901/tsfile/live/1010_1.m3u8?key=txiptv
 五星体育,https://cdn.qd.je/163189.php?id=wxty
-五星体育,http://180.165.12.42:50001/tsfile/live/0001_41.m3u8?key=txiptv&playlive=1&authid=0
 五星体育,kankan://10|Referer=https://live.kankanews.com/&Origin=https://live.kankanews.com&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
 CCTV5,http://69.30.245.50/live/cctv5.m3u8|Origin=https://yibababa.com
 CCTV5,https://cdn16.163189.xyz/163189/cctv5|Origin=https://yibababa.com

@@ -71,10 +71,10 @@ const C13_FALLBACKS = [
   { url: 'https://timetv.shop/http://74.91.26.218:82/live/cctv13hd.m3u8', headers: { Origin: 'https://yibababa.com' } },
 ];
 
-// 主力线路1(.php 壳返回 master,内指 cdn15.163189/wxty,实测可播);kankan://10 降为线路2
+// 线路1 txiptv 直连(2026-07-01 实测 1080p std68.9 真五星 ONE 搏击,首响0.44s ~10Mbps 余量1.15x);线路2 .php 壳(内指 cdn15.163189/wxty);kankan://10 为线路3
 const WX_PRIMARY = [
+  { url: 'http://139.227.21.22:9901/tsfile/live/1010_1.m3u8?key=txiptv', headers: {} },
   { url: 'https://cdn.qd.je/163189.php?id=wxty', headers: {} },
-  { url: 'http://180.165.12.42:50001/tsfile/live/0001_41.m3u8?key=txiptv&playlive=1&authid=0', headers: {} },
 ];
 const WX_FALLBACKS = [];
 
