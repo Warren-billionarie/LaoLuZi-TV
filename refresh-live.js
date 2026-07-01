@@ -90,7 +90,9 @@ const C5_FALLBACKS = [
   { url: 'https://timetv.shop/http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078401_dlna.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
   // 5) 163189 第二路 CCTV5(cctv5-2,1080p25 ~9Mbps,CF 无 key,US 友好,实测余量 13x;与线路2同 CDN 不同 feed key。cdn.qd.je 套壳实为此直链,用直链省一跳)
   { url: 'https://cdn16.163189.xyz/163189/cctv5-2', headers: { Origin: SOURCE_B.ORIGIN } },
-  // 删:darwin cctv5(2026-07-01 实测 livekey 账号级过期 error_account_expired.mp4);咪咕 mg.cttv.vip(2026-07-01 实测 400「节目调整暂不提供服务」)
+  // 6) darwin 高码率后端(ch...1187,8.7Mbps≈1080p,余量4.3x,画质最高档),CF 前置;冷启动慢(首响~9.5s)+ 依赖免费 livekey(账号级,曾过期又复活,随时可能再挂)→ 排末位兜底(2026-07-01 复活后加回)
+  { url: 'https://live.264788.xyz/channel/cctv5?streamid=188da934b8ba25977f0ac6a59478a16b&livekey=01Wb7kjxu1xx2f7s4tcqSAF03RfwBkY7h8Nz2', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
+  // 删:咪咕 mg.cttv.vip(2026-07-01 实测 400「节目调整暂不提供服务」)
 ];
 
 // CCTV5+ 全显式 4 条线路(顺序即播放优先级,2026-06-25 实测重排):
