@@ -64,6 +64,9 @@ const SOURCE_C_CHANNELS = [];
 const C9_FALLBACKS = [
   { url: 'http://74.91.26.218:82/live/cctv9hd.m3u8', headers: {} },
   { url: 'https://timetv.shop/http://74.91.26.218:82/live/cctv9hd.m3u8', headers: { Origin: 'https://yibababa.com' } },
+  // 3) 咪咕壳(mg.cttv.vip→miguvideo 中国移动 CDN),H.264 720p25+AAC,无 header/壳现取 token 不过期。
+  //    线路1/2 同为 74.91 单机后端,此线是唯一独立 CDN,74.91 挂时靠它兜底(2026-07-01 US 实测 ~1MB/s≈3x 余量;跨太平洋 + 会 flap,故列末位)
+  { url: 'http://mg.cttv.vip/673168140', headers: {} },
 ];
 
 const C13_FALLBACKS = [
@@ -104,7 +107,9 @@ const C5_FALLBACKS = [
 const C5P_FALLBACKS = [
   // 1) 163189 CF 前置 1080p,无 key,US/叔叔家友好(真 TS 伪装成 image/jpeg,魔数 0x47)—— 主力(2026-07-01 提为线路1,实测 1080p std59 5.4MB/s)
   { url: 'https://cdn16.163189.xyz/163189/cctv5p', headers: { Origin: SOURCE_B.ORIGIN } },
-  // 2) 加拿大 720p(302→69.197.149.218)
+  // 2) 咪咕壳(mg.cttv.vip→miguvideo 中国移动 CDN),H.264 720p25+AAC,无 header/壳现取 token 不过期。独立 CDN 备份(2026-07-01 US 实测 ~1MB/s≈3x 余量;跨太平洋+会 flap)
+  { url: 'http://mg.cttv.vip/641886773', headers: {} },
+  // 3) 加拿大 720p(302→69.197.149.218)
   { url: 'http://207.56.13.146:81/cdnlive/cctv5p.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
   // 3) ysp 直连 540p(2024078001),低带宽末线兜底
   { url: 'http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078001_dlna.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
@@ -112,8 +117,11 @@ const C5P_FALLBACKS = [
 ];
 
 const JISHI_EXTRA = [
-  // 删:darwin dongfangweishi(2026-07-01 darwin livekey 账号级过期);仅留 173.208 堪萨斯城 720p 直连
+  // 删:darwin dongfangweishi(2026-07-01 darwin livekey 账号级过期)
+  // 1) 173.208 堪萨斯城 720p 直连
   { name: '东方卫视', url: 'http://173.208.212.130:8181/720p/dfws.m3u8', headers: {} },
+  // 2) 咪咕壳(mg.cttv.vip→miguvideo 中国移动 CDN),HEVC 720p25+AAC,无 header/壳现取 token 不过期。独立 CDN 第二线(2026-07-01 US 实测 ~1.2MB/s≈3x 余量;跨太平洋+会 flap)
+  { name: '东方卫视', url: 'http://mg.cttv.vip/651632648', headers: {} },
 ];
 
 // ---- static ----
