@@ -78,21 +78,23 @@ const WX_PRIMARY = [
 ];
 const WX_FALLBACKS = [];
 
-// CCTV5 全显式 6 条线路(顺序即播放优先级,2026-06-25 实测重排;2026-06-30 加线路6):
+// CCTV5 全显式 7 条线路(顺序即播放优先级,2026-07-01 重排:美国高清源置顶抗卡):
 const C5_FALLBACKS = [
-  // 1) 美国堪萨斯城直连 1080p,无 key/无 token —— 主力(0.14s,std 31)
-  { url: 'http://69.30.245.50/live/cctv5.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
-  // 2) 163189 CF 前置,叔叔家蜂窝网友好(真 TS 伪装成 image/jpeg,魔数 0x47)
-  { url: 'https://cdn16.163189.xyz/163189/cctv5', headers: { Origin: SOURCE_B.ORIGIN } },
-  // 3) ysp 直连 2024078403 真 1080p;跨太平洋首屏略慢(open~6.4s),1080p 兜底
+  // 1) 美国堪萨斯城 Nocix,302→198.204.233.138:82,720p,无 key/无 header —— 主力(US 实测 .ts 37Mbps≈11x 余量,std 1.6 真画面)
+  { url: 'http://198.204.228.26/live/cctv5hd.m3u8', headers: {} },
+  // 2) 美国堪萨斯城 WholeSale,302→173.208.146.10:8082,720p,无 key/无 header —— 主力(US 实测 .ts 25Mbps≈8x 余量,std 3.9 真画面)
+  { url: 'http://bztv.tvbus.cc:8081/cdnlive/cctv5.m3u8', headers: {} },
+  // 3) ysp 直连 2024078403 真 1080p;落沙特(43.152.31.17),.ts~7.4Mbps≈2.3x 余量,中东抖动次选
   { url: 'http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078403_dlna.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
-  // 4) ysp 540p 经 timetv 反代,低带宽末线兜底
-  { url: 'https://timetv.shop/http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078401_dlna.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
-  // 5) 163189 第二路 CCTV5(cctv5-2,1080p25 ~9Mbps,CF 无 key,US 友好,实测余量 13x;与线路2同 CDN 不同 feed key。cdn.qd.je 套壳实为此直链,用直链省一跳)
+  // 4) ysp 直连 2024078401 540p;落沙特,.ts~4Mbps 低带宽兜底
+  { url: 'http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078401_dlna.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
+  // 5) 163189 第二路 CCTV5(cctv5-2,1080p25 ~9Mbps,CF 无 key,US 友好,实测余量 13x)
   { url: 'https://cdn16.163189.xyz/163189/cctv5-2', headers: { Origin: SOURCE_B.ORIGIN } },
-  // 6) darwin 高码率后端(ch...1187,8.7Mbps≈1080p,余量4.3x,画质最高档),CF 前置;冷启动慢(首响~9.5s)+ 依赖免费 livekey(账号级,曾过期又复活,随时可能再挂)→ 排末位兜底(2026-07-01 复活后加回)
-  { url: 'https://live.264788.xyz/channel/cctv5?streamid=188da934b8ba25977f0ac6a59478a16b&livekey=01Wb7kjxu1xx2f7s4tcqSAF03RfwBkY7h8Nz2', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
-  // 删:咪咕 mg.cttv.vip(2026-07-01 实测 400「节目调整暂不提供服务」)
+  // 6) 美国堪萨斯城 69.30 直连 1080p 无 key(原主线,2026-07-01 降末尾兜底)
+  { url: 'http://69.30.245.50/live/cctv5.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
+  // 7) ysp 540p 经 timetv 反代,低带宽末线兜底
+  { url: 'https://timetv.shop/http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078401_dlna.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
+  // 删(2026-07-01):cdn16/cctv5(旧线路2)、darwin cctv5(livekey 账号级随时挂)、mg.cttv.vip(400 报错)
 ];
 
 // CCTV5+ 全显式 4 条线路(顺序即播放优先级,2026-06-25 实测重排):
@@ -403,8 +405,14 @@ function build({ aResults, bResults, bExtra, c9Lines, c13Lines, statics }) {
     const s = ch.headers && Object.keys(ch.headers).length > 0 ? suffix(ch.headers) : '';
     lines.push(`${ch.alias},${ch.url}${s}`);
   }
-  for (const fb of C5_FALLBACKS) lines.push(`CCTV5,${fb.url}${suffix(fb.headers)}`);
-  for (const fb of C5P_FALLBACKS) lines.push(`CCTV5+,${fb.url}${suffix(fb.headers)}`);
+  for (const fb of C5_FALLBACKS) {
+    const s = fb.headers && Object.keys(fb.headers).length > 0 ? suffix(fb.headers) : '';
+    lines.push(`CCTV5,${fb.url}${s}`);
+  }
+  for (const fb of C5P_FALLBACKS) {
+    const s = fb.headers && Object.keys(fb.headers).length > 0 ? suffix(fb.headers) : '';
+    lines.push(`CCTV5+,${fb.url}${s}`);
+  }
   for (const ch of bResults.filter(c => c.alias === 'CCTV5+')) {
     const s = ch.headers && Object.keys(ch.headers).length > 0 ? suffix(ch.headers) : '';
     lines.push(`${ch.alias},${ch.url}${s}`);
