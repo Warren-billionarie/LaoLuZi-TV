@@ -84,17 +84,20 @@ const C5_FALLBACKS = [
   { url: 'http://198.204.228.26/live/cctv5hd.m3u8', headers: {} },
   // 2) 美国堪萨斯城 WholeSale,302→173.208.146.10:8082,720p,无 key/无 header —— 主力(US 实测 .ts 25Mbps≈8x 余量,std 3.9 真画面)
   { url: 'http://bztv.tvbus.cc:8081/cdnlive/cctv5.m3u8', headers: {} },
-  // 3) ysp 直连 2024078403 真 1080p;落沙特(43.152.31.17),.ts~7.4Mbps≈2.3x 余量,中东抖动次选
+  // 3) 咪咕视频壳(mg.cttv.vip→miguvideo 中国移动 CDN),HEVC 720p25+AAC ~1.5Mbps,无 UA/header 限制,壳每次现取 token 不过期。
+  //    2026-07-01 曾 400 被删,07-01 晚复活且用户 VLC 实测全程流畅;US 办公网测 .ts 余量仅 1.3-1.8x(跨太平洋),但 CDN 独立(不与堪萨斯城机房群同生死),若再 400 降末尾或删
+  { url: 'http://mg.cttv.vip/641886683', headers: {} },
+  // 4) ysp 直连 2024078403 真 1080p;落沙特(43.152.31.17),.ts~7.4Mbps≈2.3x 余量,中东抖动次选
   { url: 'http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078403_dlna.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
-  // 4) ysp 直连 2024078401 540p;落沙特,.ts~4Mbps 低带宽兜底
+  // 5) ysp 直连 2024078401 540p;落沙特,.ts~4Mbps 低带宽兜底
   { url: 'http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078401_dlna.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
-  // 5) 163189 第二路 CCTV5(cctv5-2,1080p25 ~9Mbps,CF 无 key,US 友好,实测余量 13x)
+  // 6) 163189 第二路 CCTV5(cctv5-2,1080p25 ~9Mbps,CF 无 key,US 友好,实测余量 13x)
   { url: 'https://cdn16.163189.xyz/163189/cctv5-2', headers: { Origin: SOURCE_B.ORIGIN } },
-  // 6) 美国堪萨斯城 69.30 直连 1080p 无 key(原主线,2026-07-01 降末尾兜底)
+  // 7) 美国堪萨斯城 69.30 直连 1080p 无 key(原主线,2026-07-01 降末尾兜底)
   { url: 'http://69.30.245.50/live/cctv5.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
-  // 7) ysp 540p 经 timetv 反代,低带宽末线兜底
+  // 8) ysp 540p 经 timetv 反代,低带宽末线兜底
   { url: 'https://timetv.shop/http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078401_dlna.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
-  // 删(2026-07-01):cdn16/cctv5(旧线路2)、darwin cctv5(livekey 账号级随时挂)、mg.cttv.vip(400 报错)
+  // 删(2026-07-01):cdn16/cctv5(旧线路2)、darwin cctv5(livekey 账号级随时挂)
 ];
 
 // CCTV5+ 全显式 4 条线路(顺序即播放优先级,2026-06-25 实测重排):
