@@ -4,14 +4,11 @@
 五星体育,kankan://10|Referer=https://live.kankanews.com/&Origin=https://live.kankanews.com&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
 CCTV5,http://69.30.245.50/live/cctv5.m3u8|Origin=https://yibababa.com
 CCTV5,https://cdn16.163189.xyz/163189/cctv5|Origin=https://yibababa.com
-CCTV5,https://live.264788.xyz/channel/cctv5?streamid=188da934b8ba25977f0ac6a59478a16b&livekey=01Wb7kjxu1xx2f7s4tcqSAF03RfwBkY7h8Nz2|User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
 CCTV5,http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078403_dlna.m3u8|Origin=https://yibababa.com
 CCTV5,https://timetv.shop/http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078401_dlna.m3u8|Origin=https://yibababa.com
 CCTV5,https://cdn16.163189.xyz/163189/cctv5-2|Origin=https://yibababa.com
-CCTV5,http://mg.cttv.vip/641886683|User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
-CCTV5+,https://live.264788.xyz/channel/cctv5p?livekey=01Wb7kjxu1xx2f7s4tcqSAF03RfwBkY7h8Nz2|User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
-CCTV5+,http://207.56.13.146:81/cdnlive/cctv5p.m3u8|Origin=https://yibababa.com
 CCTV5+,https://cdn16.163189.xyz/163189/cctv5p|Origin=https://yibababa.com
+CCTV5+,http://207.56.13.146:81/cdnlive/cctv5p.m3u8|Origin=https://yibababa.com
 CCTV5+,http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078001_dlna.m3u8|Origin=https://yibababa.com
 Eurosport 1,http://151.80.18.177:86/Eurosport_HD/index.m3u8
 ESPN,https://t.freetv.fun/live/espn.m3u8|User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
@@ -26,7 +23,6 @@ CCTV13,https://timetv.shop/http://74.91.26.218:82/live/cctv13hd.m3u8|Origin=http
 凤凰资讯,http://cdn6.163189.xyz/163189/fhzx
 纪实,#genre#
 新纪实,kankan://12|Referer=https://live.kankanews.com/&Origin=https://live.kankanews.com&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
-东方卫视,https://live.264788.xyz/channel/dongfangweishi?livekey=01Wb7kjxu1xx2f7s4tcqSAF03RfwBkY7h8Nz2|User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
 东方卫视,http://173.208.212.130:8181/720p/dfws.m3u8
 电影,#genre#
 经典电影,http://wfenf.x3322.net:7788/625703337|User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36

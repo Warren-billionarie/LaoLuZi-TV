@@ -84,32 +84,28 @@ const C5_FALLBACKS = [
   { url: 'http://69.30.245.50/live/cctv5.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
   // 2) 163189 CF 前置,叔叔家蜂窝网友好(真 TS 伪装成 image/jpeg,魔数 0x47)
   { url: 'https://cdn16.163189.xyz/163189/cctv5', headers: { Origin: SOURCE_B.ORIGIN } },
-  // 3) darwin 高码率后端(streamid=...1187 → ch...1187,8Mbps≈1080p),CF 前置,叔叔家友好;依赖免费 livekey
-  { url: 'https://live.264788.xyz/channel/cctv5?streamid=188da934b8ba25977f0ac6a59478a16b&livekey=01Wb7kjxu1xx2f7s4tcqSAF03RfwBkY7h8Nz2', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
-  // 4) ysp 直连 2024078403 真 1080p;跨太平洋首屏略慢(open~6.4s),1080p 兜底
+  // 3) ysp 直连 2024078403 真 1080p;跨太平洋首屏略慢(open~6.4s),1080p 兜底
   { url: 'http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078403_dlna.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
-  // 5) ysp 540p 经 timetv 反代,低带宽末线兜底
+  // 4) ysp 540p 经 timetv 反代,低带宽末线兜底
   { url: 'https://timetv.shop/http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078401_dlna.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
-  // 6) 163189 第二路 CCTV5(cctv5-2,1080p25 ~9Mbps,CF 无 key,US 友好,实测余量 13x;与线路2同 CDN 不同 feed key。cdn.qd.je 套壳实为此直链,用直链省一跳)
+  // 5) 163189 第二路 CCTV5(cctv5-2,1080p25 ~9Mbps,CF 无 key,US 友好,实测余量 13x;与线路2同 CDN 不同 feed key。cdn.qd.je 套壳实为此直链,用直链省一跳)
   { url: 'https://cdn16.163189.xyz/163189/cctv5-2', headers: { Origin: SOURCE_B.ORIGIN } },
-  // 7) 咪咕跳转器 mg.cttv.vip(302→miguvideo H.265 ~2Mbps),每请求现签 token(存跳转器 URL,L2/L3 reload 自愈)。中国移动 host,US 实测 .ts 476KB/s≈1.7x 余量够播;速度随时段波动,末位兜底
-  { url: 'http://mg.cttv.vip/641886683', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
+  // 删:darwin cctv5(2026-07-01 实测 livekey 账号级过期 error_account_expired.mp4);咪咕 mg.cttv.vip(2026-07-01 实测 400「节目调整暂不提供服务」)
 ];
 
 // CCTV5+ 全显式 4 条线路(顺序即播放优先级,2026-06-25 实测重排):
 const C5P_FALLBACKS = [
-  // 1) darwin cctv5p 1080p,CF 前置,叔叔家友好;依赖免费 livekey(备用 key: 01WgOR41rriMmMkzNsd0UoaxJRwetZdxIvtVk)
-  { url: 'https://live.264788.xyz/channel/cctv5p?livekey=01Wb7kjxu1xx2f7s4tcqSAF03RfwBkY7h8Nz2', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
+  // 1) 163189 CF 前置 1080p,无 key,US/叔叔家友好(真 TS 伪装成 image/jpeg,魔数 0x47)—— 主力(2026-07-01 提为线路1,实测 1080p std59 5.4MB/s)
+  { url: 'https://cdn16.163189.xyz/163189/cctv5p', headers: { Origin: SOURCE_B.ORIGIN } },
   // 2) 加拿大 720p(302→69.197.149.218)
   { url: 'http://207.56.13.146:81/cdnlive/cctv5p.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
-  // 3) 163189 CF 前置 1080p,无 key,叔叔家友好(真 TS 伪装成 image/jpeg,魔数 0x47)
-  { url: 'https://cdn16.163189.xyz/163189/cctv5p', headers: { Origin: SOURCE_B.ORIGIN } },
-  // 4) ysp 直连 540p(2024078001),低带宽末线兜底
+  // 3) ysp 直连 540p(2024078001),低带宽末线兜底
   { url: 'http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078001_dlna.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
+  // 删:darwin cctv5p 1080p(2026-07-01 实测 livekey 账号级过期,主+备 key 全 error_account_expired.mp4)
 ];
 
 const JISHI_EXTRA = [
-  { name: '东方卫视', url: 'https://live.264788.xyz/channel/dongfangweishi?livekey=01Wb7kjxu1xx2f7s4tcqSAF03RfwBkY7h8Nz2', headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36' } },
+  // 删:darwin dongfangweishi(2026-07-01 darwin livekey 账号级过期);仅留 173.208 堪萨斯城 720p 直连
   { name: '东方卫视', url: 'http://173.208.212.130:8181/720p/dfws.m3u8', headers: {} },
 ];
 
