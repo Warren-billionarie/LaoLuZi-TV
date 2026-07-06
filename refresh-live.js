@@ -74,10 +74,10 @@ const C13_FALLBACKS = [
   { url: 'https://timetv.shop/http://74.91.26.218:82/live/cctv13hd.m3u8', headers: { Origin: 'https://yibababa.com' } },
 ];
 
-// 五星体育线路(2026-07-01 重排,VLC 实测均流畅):线路1 163189 直链(cdn15,秒开1080p ~210Mbps 余量25x,无key无header,蜂窝网也能播);线路2 darwin(CF独立CDN 1080p ~92Mbps,靠免费livekey,蜂窝网也能播);线路3 kankan://10(火山,仅住宅固网,App端实时取token)。删:139.227(中国联通,美国12s超时死线)、cdn.qd.je壳(永远只指cdn15,多一跳,用直链替代)
+// 五星体育线路(2026-07-06 重排):线路1 darwin 高清(不带 streamid→8000_hls,1080p H.264+MP2,US 实测 15.5MB/s);线路2 darwin 标清(streamid 钉死 720×576 ~2.5Mbps,US 实测 1.3MB/s≈4x);线路3 kankan://10(火山,仅住宅固网,App端实时取token)。⚠️ 线1/线2 同 livekey 同账号,一起死一起活。删:cdn15.163189/wxty(2026-07-06 确认 403,163189 全家换链失效)
 const WX_PRIMARY = [
-  { url: 'https://cdn15.163189.xyz/163189/wxty', headers: {} },
   { url: 'https://live.264788.xyz/channel/wuxingtiyu?livekey=01Wb7kjxu1xx2f7s4tcqSAF03RfwBkY7h8Nz2', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
+  { url: 'https://live.264788.xyz/channel/wuxingtiyu?streamid=574ea4050333d6418edfd71d0df52f43&livekey=01Wb7kjxu1xx2f7s4tcqSAF03RfwBkY7h8Nz2', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
 ];
 const WX_FALLBACKS = [];
 
