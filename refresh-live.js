@@ -67,11 +67,15 @@ const C9_FALLBACKS = [
   // 3) 咪咕壳(mg.cttv.vip→miguvideo 中国移动 CDN),H.264 720p25+AAC,无 header/壳现取 token 不过期。
   //    线路1/2 同为 74.91 单机后端,此线是唯一独立 CDN,74.91 挂时靠它兜底(2026-07-01 US 实测 ~1MB/s≈3x 余量;跨太平洋 + 会 flap,故列末位)
   { url: 'http://mg.cttv.vip/673168140', headers: {} },
+  // 4) udpxy 组播中继(上海电信,CCTV9 只有 HD 1080p ~8.5Mbps),独立故障域末位兜底;实时转发零余量,跨洋 8Mbps 波动易卡(2026-07-06 US 测实时比 0.99x)。SD 段无 CCTV9,只此一条
+  { url: 'http://58.35.123.183:3333/rtp/233.18.204.75:5140', headers: {} },
 ];
 
 const C13_FALLBACKS = [
   { url: 'http://74.91.26.218:82/live/cctv13hd.m3u8', headers: {} },
   { url: 'https://timetv.shop/http://74.91.26.218:82/live/cctv13hd.m3u8', headers: { Origin: 'https://yibababa.com' } },
+  // 3) udpxy 组播中继(上海电信,SD 720×576 ~2.8Mbps),独立故障域末位兜底;实时转发零余量+私人盒子,跨洋波动会卡(2026-07-06 US 测实时比 0.99x)。同盒 HD 版 233.18.204.79:5140 未用
+  { url: 'http://58.35.123.183:3333/rtp/233.18.204.32:5140', headers: {} },
 ];
 
 // 五星体育线路(2026-07-06 重排):线路1 darwin 高清(不带 streamid→8000_hls,1080p H.264+MP2,US 实测 15.5MB/s);线路2 darwin 标清(streamid 钉死 720×576 ~2.5Mbps,US 实测 1.3MB/s≈4x);线路3 udpxy 组播中继(上海电信,SD 720×576 ~2.8Mbps,用户家实测不卡;同盒 HD 版 233.18.204.58:5140 码率 8.7Mbps 跨洋易卡未用;实时转发零余量+私人盒子);线路4 kankan://10(火山,仅住宅固网,App端实时取token)。⚠️ 线1/线2 同 livekey 同账号,一起死一起活。删:cdn15.163189/wxty(2026-07-06 确认 403,163189 全家换链失效)
@@ -101,6 +105,8 @@ const C5_FALLBACKS = [
   { url: 'http://69.30.245.50/live/cctv5.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
   // 8) ysp 540p 经 timetv 反代,低带宽末线兜底
   { url: 'https://timetv.shop/http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078401_dlna.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
+  // 9) udpxy 组播中继(上海电信,SD 720×576 ~2.8Mbps),独立故障域末位兜底;实时转发零余量+私人盒子,跨洋波动会卡(2026-07-06 US 测实时比 0.96x)。同盒 HD 版 233.18.204.71:5140 8Mbps 跨洋更易卡未用
+  { url: 'http://58.35.123.183:3333/rtp/233.18.204.24:5140', headers: {} },
   // 删(2026-07-01):cdn16/cctv5(旧线路2)、darwin cctv5(livekey 账号级随时挂)
 ];
 
