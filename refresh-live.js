@@ -125,9 +125,10 @@ const JISHI_EXTRA = [
 ];
 
 // ---- static ----
+// 2026-07-06 换 darwin(264788):原 cdn6.163189 链接失效(163189 全家换链)。1080p H.264+AAC 真直播,无 UA 限制,US 实测 2.3-12MB/s;livekey 01WgOR41(账号级,和五星 darwin 备 key 同号)
 const STATIC_CHANNELS = [
-  { alias: '凤凰中文', url: 'http://cdn6.163189.xyz/163189/fhzw' },
-  { alias: '凤凰资讯', url: 'http://cdn6.163189.xyz/163189/fhzx' },
+  { alias: '凤凰中文', url: 'https://live.264788.xyz/channel/fenghuangweishizhongwen?streamid=3ed416f2709e7ecaf6dc1b9d9c66bb5e&livekey=01WgOR41rriMmMkzNsd0UoaxJRwetZdxIvtVk' },
+  { alias: '凤凰资讯', url: 'https://live.264788.xyz/channel/fenghuangweishizixun?streamid=77bd953dbf073e11b80bba0a8aca92c5&livekey=01WgOR41rriMmMkzNsd0UoaxJRwetZdxIvtVk' },
 ];
 
 // 体育组静态频道(非 yibababa,Cloudflare 前置,带 UA)
