@@ -16,7 +16,6 @@ CCTV5+,https://cdn16.163189.xyz/163189/cctv5p|Origin=https://yibababa.com
 CCTV5+,http://mg.cttv.vip/641886773
 CCTV5+,http://207.56.13.146:81/cdnlive/cctv5p.m3u8|Origin=https://yibababa.com
 CCTV5+,http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078001_dlna.m3u8|Origin=https://yibababa.com
-Eurosport 1,http://151.80.18.177:86/Eurosport_HD/index.m3u8
 ESPN,https://t.freetv.fun/live/espn.m3u8|User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
 富士体育,https://fujitv4.mov3.co/hls/fujitv.m3u8
 央视,#genre#
