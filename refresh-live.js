@@ -99,8 +99,8 @@ const C5_FALLBACKS = [
   { url: 'http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078403_dlna.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
   // 5) ysp 直连 2024078401 540p;落沙特,.ts~4Mbps 低带宽兜底
   { url: 'http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078401_dlna.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
-  // 6) 163189 第二路 CCTV5(cctv5-2,1080p25 ~9Mbps,CF 无 key,US 友好,实测余量 13x)
-  { url: 'https://cdn16.163189.xyz/163189/cctv5-2', headers: { Origin: SOURCE_B.ORIGIN } },
+  // 6) cqshushu php 壳 → 301→icntvcdn 未来电视 CDN(120.220.164.81 中国联通山东),1080p H.264 SAR1:1 真16:9;US 实测 .ts 2.7Mbps 余量 2.4x、首响 0.9-1.5s(2026-07-08 换掉过期的 cctv5-2:原 163189/cctv5-2 已 302→expired.html 死)
+  { url: 'http://iptv.cqshushu.com/ysws.php?id=cctv5', headers: {} },
   // 7) 美国堪萨斯城 69.30 直连 1080p 无 key(原主线,2026-07-01 降末尾兜底)
   { url: 'http://69.30.245.50/live/cctv5.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
   // 8) ysp 540p 经 timetv 反代,低带宽末线兜底
