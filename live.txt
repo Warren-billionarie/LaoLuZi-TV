@@ -1,7 +1,8 @@
 体育,#genre#
+五星体育,http://58.35.123.183:3333/rtp/233.18.204.6:5140
+五星体育,http://139.227.21.22:9901/tsfile/live/1010_1.m3u8?key=txiptv
 五星体育,https://live.264788.xyz/channel/wuxingtiyu?livekey=01Wb7kjxu1xx2f7s4tcqSAF03RfwBkY7h8Nz2|User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
 五星体育,https://live.264788.xyz/channel/wuxingtiyu?streamid=574ea4050333d6418edfd71d0df52f43&livekey=01Wb7kjxu1xx2f7s4tcqSAF03RfwBkY7h8Nz2|User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
-五星体育,http://58.35.123.183:3333/rtp/233.18.204.6:5140
 五星体育,kankan://10|Referer=https://live.kankanews.com/&Origin=https://live.kankanews.com&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
 CCTV5,http://198.204.228.26/live/cctv5hd.m3u8
 CCTV5,http://bztv.tvbus.cc:8081/cdnlive/cctv5.m3u8

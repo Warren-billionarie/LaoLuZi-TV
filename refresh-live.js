@@ -78,11 +78,12 @@ const C13_FALLBACKS = [
   { url: 'http://58.35.123.183:3333/rtp/233.18.204.32:5140', headers: {} },
 ];
 
-// 五星体育线路(2026-07-06 重排):线路1 darwin 高清(不带 streamid→8000_hls,1080p H.264+MP2,US 实测 15.5MB/s);线路2 darwin 标清(streamid 钉死 720×576 ~2.5Mbps,US 实测 1.3MB/s≈4x);线路3 udpxy 组播中继(上海电信,SD 720×576 ~2.8Mbps,用户家实测不卡;同盒 HD 版 233.18.204.58:5140 码率 8.7Mbps 跨洋易卡未用;实时转发零余量+私人盒子);线路4 kankan://10(火山,仅住宅固网,App端实时取token)。⚠️ 线1/线2 同 livekey 同账号,一起死一起活。删:cdn15.163189/wxty(2026-07-06 确认 403,163189 全家换链失效)
+// 五星体育线路(2026-07-16 重排:darwin shcm 源站 CF 522 持续故障,udpxy 提主力):线路1 udpxy 组播中继(上海电信,SD 720×576 ~2.8Mbps,用户家实测不卡;实时转发零余量+私人盒子);线路2 139.227 txiptv(上海,1080p H.264+MP2 ~8.9Mbps,US 实测 1.9MB/s≈1.7x;7-01 死过一次会 flap);线路3 darwin 高清(不带 streamid→8000_hls,1080p;2026-07-16 源站 shcm 522 死,留着等复活);线路4 darwin 标清(streamid 钉死 720×576;和线3 同源站一起死活);线路5 kankan://10(火山,仅住宅固网,App端实时取token)。删:cdn15.163189/wxty(2026-07-06 确认 403)
 const WX_PRIMARY = [
+  { url: 'http://58.35.123.183:3333/rtp/233.18.204.6:5140', headers: {} },
+  { url: 'http://139.227.21.22:9901/tsfile/live/1010_1.m3u8?key=txiptv', headers: {} },
   { url: 'https://live.264788.xyz/channel/wuxingtiyu?livekey=01Wb7kjxu1xx2f7s4tcqSAF03RfwBkY7h8Nz2', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
   { url: 'https://live.264788.xyz/channel/wuxingtiyu?streamid=574ea4050333d6418edfd71d0df52f43&livekey=01Wb7kjxu1xx2f7s4tcqSAF03RfwBkY7h8Nz2', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
-  { url: 'http://58.35.123.183:3333/rtp/233.18.204.6:5140', headers: {} },
 ];
 const WX_FALLBACKS = [];
 
