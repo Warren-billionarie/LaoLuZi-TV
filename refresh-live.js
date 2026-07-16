@@ -156,6 +156,17 @@ const STATIC_MOVIES = [
   { alias: '周星驰电影', url: 'http://198.204.228.26/live/lbzxc.m3u8', headers: {} },
   // 周润发电影:302→107.150.42.114:82(zbdq 源站家族,同周星驰/动作电影),480p H.264,US 实测首响 0.26s 真影片(2026-07-08 加)
   { alias: '周润发电影', url: 'http://107.150.60.122/live/lbzrf.m3u8', headers: {} },
+  // 以下 5 条 2026-07-16 加:斗鱼/虎牙 24h 循环放剧直播间壳,壳每请求现签 token(302→FLV,存壳URL自愈),H.264+AAC FLV。US 办公室实测全通,CDN 无地域封锁
+  // 冰冰影院:goodiptv 壳→hw3.douyucdn2.cn 斗鱼,720p,实测古装剧《洗冤录》
+  { alias: '冰冰影院', url: 'http://www.goodiptv.club/douyu/74374', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
+  // 刀刀影院:goodiptv 壳→hw1a.douyucdn2.cn 斗鱼,1080p,实测《水浒传》
+  { alias: '刀刀影院', url: 'http://www.goodiptv.club/douyu/747764', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
+  // 华语影院:goodiptv 壳→斗鱼(IP中转),1080p,实测《倚天屠龙记》
+  { alias: '华语影院', url: 'http://www.goodiptv.club/douyu/3928', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
+  // 古装武侠:goodiptv 壳→hw3.douyucdn2.cn 斗鱼,720p,实测《侠客行》
+  { alias: '古装武侠', url: 'http://www.goodiptv.club/douyu/2793084', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
+  // 刘德华电影:metshop 壳→al.flv.huya.com 虎牙,720p,实测港产片
+  { alias: '刘德华电影', url: 'http://live.metshop.top/huya/11342424?cdn=alicdn', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
 ];
 
 // ============================================================
