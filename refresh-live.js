@@ -72,6 +72,12 @@ const C9_FALLBACKS = [
 ];
 
 const C13_FALLBACKS = [
+  // 1) 咪咕壳(mg.cttv.vip→miguvideo 中国移动 CDN),实测 720p H.264 25fps+AAC(路径写 SD 实为 1280×720),无 header/壳现取 token。
+  //    独立故障域(不走 zbdq4/74.91),用户 2026-07-17 给的优质源,提为主力线路1(US 实测 ~1.6x 余量)
+  { url: 'http://mg.cttv.vip/608807423', headers: {} },
+  // 2) 美国堪萨斯城 Nocix(zbdq4 源站家族,同 CCTV5/周星驰/周润发/动作电影的 198.204.228.26),302→198.204.229.186:82,720p H.264 25fps+AAC,无 key/无 header。
+  //    用户 2026-07-17 报旧线(74.91)不能看后指定换此源(US 实测 .ts 2.7MB/s≈13x 余量,std 干净真画面)
+  { url: 'http://198.204.228.26/live/cctv13hd.m3u8', headers: {} },
   { url: 'http://74.91.26.218:82/live/cctv13hd.m3u8', headers: {} },
   { url: 'https://timetv.shop/http://74.91.26.218:82/live/cctv13hd.m3u8', headers: { Origin: 'https://yibababa.com' } },
   // 3) udpxy 组播中继(上海电信,SD 720×576 ~2.8Mbps),独立故障域末位兜底;实时转发零余量+私人盒子,跨洋波动会卡(2026-07-06 US 测实时比 0.99x)。同盒 HD 版 233.18.204.79:5140 未用
@@ -165,8 +171,7 @@ const STATIC_MOVIES = [
   { alias: '华语影院', url: 'http://www.goodiptv.club/douyu/3928', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
   // 古装武侠:goodiptv 壳→hw3.douyucdn2.cn 斗鱼,720p,实测《侠客行》
   { alias: '古装武侠', url: 'http://www.goodiptv.club/douyu/2793084', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
-  // 刘德华电影:metshop 壳→al.flv.huya.com 虎牙,720p,实测港产片
-  { alias: '刘德华电影', url: 'http://live.metshop.top/huya/11342424?cdn=alicdn', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
+  // 刘德华电影(metshop 壳→虎牙 al.flv):2026-07-17 删除——直播FLV在电视盒子硬解+跨洋Wi-Fi下结构性卡顿(1080×602 非标准几何+B帧+时间戳不规整),VLC软解不卡,改源无解
 ];
 
 // ============================================================
