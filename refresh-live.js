@@ -136,6 +136,8 @@ const JISHI_EXTRA = [
   { name: '东方卫视', url: 'http://173.208.212.130:8181/720p/dfws.m3u8', headers: {} },
   // 2) 咪咕壳(mg.cttv.vip→miguvideo 中国移动 CDN),HEVC 720p25+AAC,无 header/壳现取 token 不过期。独立 CDN 第二线(2026-07-01 US 实测 ~1.2MB/s≈3x 余量;跨太平洋+会 flap)
   { name: '东方卫视', url: 'http://mg.cttv.vip/651632648', headers: {} },
+  // 纬来日本(Videoland Japan):rtmp 直推,f13h.mine.nu,720p H.264 Main 30fps+AAC。App 已集成 media3-datasource-rtmp(2026-07-17 加,US 实测 ffprobe 通)
+  { name: '纬来日本', url: 'rtmp://f13h.mine.nu/sat/tv771', headers: {} },
 ];
 
 // ---- static ----
@@ -172,6 +174,13 @@ const STATIC_MOVIES = [
   // 古装武侠:goodiptv 壳→hw3.douyucdn2.cn 斗鱼,720p,实测《侠客行》
   { alias: '古装武侠', url: 'http://www.goodiptv.club/douyu/2793084', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
   // 刘德华电影(metshop 壳→虎牙 al.flv):2026-07-17 删除——直播FLV在电视盒子硬解+跨洋Wi-Fi下结构性卡顿(1080×602 非标准几何+B帧+时间戳不规整),VLC软解不卡,改源无解
+  // 橙记港剧:goodiptv 壳→斗鱼,720p H.264 High 30fps+AAC ~4.2Mbps(2026-07-17 加,US 实测真FLV;码率偏高跨洋余量小)
+  { alias: '橙记港剧', url: 'http://www.goodiptv.club/douyu/4549169', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
+  // 热门港剧:goodiptv 壳→斗鱼,720p H.264 High 30fps+AAC ~3.1Mbps(2026-07-17 加,US 实测真FLV)
+  { alias: '热门港剧', url: 'http://www.goodiptv.club/douyu/5522351', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
+  // 七龙珠:metshop 壳→虎牙,960×720(4:3)H.264 Main 30fps+AAC ~1.2Mbps(2026-07-17 加,用户VLC实测可播不卡)。
+  //   比刘德华干净(标准几何+Main profile,对电视硬解友好);只需 UA。⚠️metshop 按 IP 限流,狂测会 403,家用单次请求无碍
+  { alias: '七龙珠', url: 'https://live.metshop.top/huya/11601966', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
 ];
 
 // ============================================================
