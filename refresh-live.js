@@ -154,12 +154,15 @@ const STATIC_SPORTS = [
   { alias: '富士体育', url: 'https://fujitv4.mov3.co/hls/fujitv.m3u8', headers: {} },
 ];
 
+// 「老陆子影院」轮播片单表。App 端 bili:// 解析器开台时拉这张表,按墙上时钟算出此刻该播哪部
+// 哪一秒。表是静态的(片长不变),内容变了才需要重跑 build-catalog 重生成,不进 6h 刷新循环。
+const LOOP_CATALOG = 'https://raw.githubusercontent.com/Warren-billionarie/LaoLuZi-TV/main/c.json';
+
 // 电影组静态频道
 const STATIC_MOVIES = [
   // 经典电影:咪咕跳转器(302→miguvideo H.264 ~2Mbps),每请求现签 token(存跳转器 URL,L2/L3 reload 自愈)。中国移动 host,US 实测 .ts 392KB/s≈1.5x 余量够播,随时段波动
   { alias: '经典电影', url: 'http://wfenf.x3322.net:7788/625703337', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
-  // 动作电影(CHC动作):302→69.30.245.194 美国堪萨斯城 WholeSale(同 CCTV5 主线机房群),US 实测 .ts 2.2MB/s 余量大
-  { alias: '动作电影', url: 'http://192.151.150.154/live/chcdz.m3u8', headers: {} },
+  // 动作电影(CHC动作,192.151.150.154):2026-07-25 按用户要求下线,位置让给「老陆子影院」
   // 周星驰电影:302→198.204.228.26 美国堪萨斯城 Nocix(zbdq 源站家族,同动作电影),US 实测 .ts 5.5MB/s 余量大
   { alias: '周星驰电影', url: 'http://198.204.228.26/live/lbzxc.m3u8', headers: {} },
   // 周润发电影:302→107.150.42.114:82(zbdq 源站家族,同周星驰/动作电影),480p H.264,US 实测首响 0.26s 真影片(2026-07-08 加)
@@ -178,9 +181,12 @@ const STATIC_MOVIES = [
   { alias: '橙记港剧', url: 'http://www.goodiptv.club/douyu/4549169', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
   // 热门港剧:goodiptv 壳→斗鱼,720p H.264 High 30fps+AAC ~3.1Mbps(2026-07-17 加,US 实测真FLV)
   { alias: '热门港剧', url: 'http://www.goodiptv.club/douyu/5522351', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
-  // 七龙珠:metshop 壳→虎牙,960×720(4:3)H.264 Main 30fps+AAC ~1.2Mbps(2026-07-17 加,用户VLC实测可播不卡)。
-  //   比刘德华干净(标准几何+Main profile,对电视硬解友好);只需 UA。⚠️metshop 按 IP 限流,狂测会 403,家用单次请求无碍
-  { alias: '七龙珠', url: 'https://live.metshop.top/huya/11601966', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
+  // 七龙珠(metshop 壳→虎牙 11601966):2026-07-25 按用户要求下线
+  //
+  // ⚠️ 老陆子影院必须留在最后一条 —— LiveParser 的 txt 分支解析 `|Key=Value` 时,header map 是
+  //    整个文件共享的、只在遇到 `#genre#` 时才清空,所以本行注入的 Referer 会「粘」到后面所有频道上。
+  //    电影是最后一组、本条是组内最后一条 = 全文件最后一行,后面没有频道可被污染。加新台请加在本条之前。
+  { alias: '老陆子影院', url: `bili://loop?src=${LOOP_CATALOG}`, headers: { 'Referer': 'https://www.bilibili.com' } },
 ];
 
 // ============================================================
