@@ -1,0 +1,22 @@
+{
+  "sites": [
+    {
+      "key": "laoluzi",
+      "name": "老陆子影院",
+      "type": 3,
+      "api": "local_LaoLuZi",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 0,
+      "ext": "https://raw.githubusercontent.com/Warren-billionarie/LaoLuZi-TV/main/v.json",
+      "style": {
+        "type": "rect",
+        "ratio": 1.78
+      },
+      "header": {
+        "Referer": "https://www.bilibili.com",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+      }
+    }
+  ]
+}
