@@ -84,11 +84,13 @@ const C13_FALLBACKS = [
   { url: 'http://58.35.123.183:3333/rtp/233.18.204.32:5140', headers: {} },
 ];
 
-// 五星体育线路(2026-07-16 重排:darwin shcm 源站 CF 522 持续故障,udpxy 提主力):线路1 udpxy 组播中继(上海电信,SD 720×576 ~2.8Mbps,用户家实测不卡;实时转发零余量+私人盒子);线路2 139.227 txiptv(上海,1080p H.264+MP2 ~8.9Mbps,US 实测 1.9MB/s≈1.7x;7-01 死过一次会 flap);线路3 darwin 高清(不带 streamid→8000_hls,1080p;2026-07-16 源站 shcm 522 死,留着等复活);线路4 darwin 标清(streamid 钉死 720×576;和线3 同源站一起死活);线路5 kankan://10(火山,仅住宅固网,App端实时取token)。删:cdn15.163189/wxty(2026-07-06 确认 403)
+// 五星体育线路(2026-08-01 换线路3:darwin 高清换成 38.75 gslb 跳转器):线路1 udpxy 组播中继(上海电信,SD 720×576 ~2.8Mbps,用户家实测不卡;实时转发零余量+私人盒子);线路2 139.227 txiptv(上海,1080p H.264+MP2 ~8.9Mbps,US 实测 1.9MB/s≈1.7x;7-01 死过一次会 flap);线路3 38.75 gslb(302→192.187.115.106:82/live/wxty,现签 jsbt/jsbk token,10s 分片,真 1080p H.264 High 25fps + AAC 48k,US 实测 2.6MB/s≈5.1x 余量,抓帧确认五星台标+真体育画面);线路4 darwin 标清(streamid 钉死 720×576;源站 shcm 522 死,留着等复活);线路5 kankan://10(火山,仅住宅固网,App端实时取token)。删:darwin 高清(2026-07-16 起源站 522 一直没活)、cdn15.163189/wxty(2026-07-06 确认 403)
 const WX_PRIMARY = [
   { url: 'http://58.35.123.183:3333/rtp/233.18.204.6:5140', headers: {} },
   { url: 'http://139.227.21.22:9901/tsfile/live/1010_1.m3u8?key=txiptv', headers: {} },
-  { url: 'https://live.264788.xyz/channel/wuxingtiyu?livekey=01Wb7kjxu1xx2f7s4tcqSAF03RfwBkY7h8Nz2', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
+  // 2026-08-01 用户给的新源。壳每次请求现签 token(jsbt=时间戳/jsbk=md5),所以 live.txt 里存壳地址、
+  // 由电视自己跟 302 —— token 在播放端现取,不存在 Action 预取导致的过期/IP 不匹配。无 UA 限制。
+  { url: 'http://38.75.136.137:98/gslb/dsdqpub/wxtyhd.m3u8?auth=testpub', headers: {} },
   { url: 'https://live.264788.xyz/channel/wuxingtiyu?streamid=574ea4050333d6418edfd71d0df52f43&livekey=01Wb7kjxu1xx2f7s4tcqSAF03RfwBkY7h8Nz2', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
 ];
 const WX_FALLBACKS = [];
@@ -141,10 +143,16 @@ const JISHI_EXTRA = [
 ];
 
 // ---- static ----
-// 2026-07-06 换 darwin(264788):原 cdn6.163189 链接失效(163189 全家换链)。1080p H.264+AAC 真直播,无 UA 限制,US 实测 2.3-12MB/s;livekey 01WgOR41(账号级,和五星 darwin 备 key 同号)
+// 2026-08-01 凤凰双台换源(用户给的新源)。旧的 darwin(264788)从 2026-07-16 起源站 fjct 劣化到
+// ~256KB/s = 0.33x 实时,必卡且无兜底,换低清无解(病在源站不在码率)。
+// 新源 = 凤凰官方 qctv.fengshows.cn 的内容,由 123.234.2.58(山东联通)前置反代,后端腾讯云(分片名带 txspiseq)。
+// 命名即频道:pcc = Phoenix Chinese Channel(中文台),pin = Phoenix InfoNews(资讯台)。
+// US 实测:两台都是 H.264 High 1280×720 25fps + AAC 48k 立体声,4s 分片;
+//   资讯 1.25Mbps / 437KB/s ≈ 2.9x 余量,中文 1.58Mbps / 474KB/s ≈ 2.5x 余量(旧源是 0.33x)。
+// 抓帧确认台标正确(资讯=蓝色地球台标,中文=橙色凤凰台标;早上并机播《早班车》所以画面会一样)。
 const STATIC_CHANNELS = [
-  { alias: '凤凰中文', url: 'https://live.264788.xyz/channel/fenghuangweishizhongwen?streamid=3ed416f2709e7ecaf6dc1b9d9c66bb5e&livekey=01WgOR41rriMmMkzNsd0UoaxJRwetZdxIvtVk' },
-  { alias: '凤凰资讯', url: 'https://live.264788.xyz/channel/fenghuangweishizixun?streamid=77bd953dbf073e11b80bba0a8aca92c5&livekey=01WgOR41rriMmMkzNsd0UoaxJRwetZdxIvtVk' },
+  { alias: '凤凰中文', url: 'http://123.234.2.58/qctv.fengshows.cn/live/0701pcc72.m3u8' },
+  { alias: '凤凰资讯', url: 'http://123.234.2.58/qctv.fengshows.cn/live/0701pin72.m3u8' },
 ];
 
 // 体育组静态频道(非 yibababa,Cloudflare 前置,带 UA)

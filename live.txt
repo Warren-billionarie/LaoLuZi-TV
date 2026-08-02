@@ -1,7 +1,7 @@
 体育,#genre#
 五星体育,http://58.35.123.183:3333/rtp/233.18.204.6:5140
 五星体育,http://139.227.21.22:9901/tsfile/live/1010_1.m3u8?key=txiptv
-五星体育,https://live.264788.xyz/channel/wuxingtiyu?livekey=01Wb7kjxu1xx2f7s4tcqSAF03RfwBkY7h8Nz2|User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
+五星体育,http://38.75.136.137:98/gslb/dsdqpub/wxtyhd.m3u8?auth=testpub
 五星体育,https://live.264788.xyz/channel/wuxingtiyu?streamid=574ea4050333d6418edfd71d0df52f43&livekey=01Wb7kjxu1xx2f7s4tcqSAF03RfwBkY7h8Nz2|User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
 五星体育,kankan://10|Referer=https://live.kankanews.com/&Origin=https://live.kankanews.com&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
 CCTV5,http://198.204.228.26/live/cctv5hd.m3u8
@@ -30,8 +30,8 @@ CCTV13,http://74.91.26.218:82/live/cctv13hd.m3u8
 CCTV13,https://timetv.shop/http://74.91.26.218:82/live/cctv13hd.m3u8|Origin=https://yibababa.com
 CCTV13,http://58.35.123.183:3333/rtp/233.18.204.32:5140
 港澳台,#genre#
-凤凰中文,https://live.264788.xyz/channel/fenghuangweishizhongwen?streamid=3ed416f2709e7ecaf6dc1b9d9c66bb5e&livekey=01WgOR41rriMmMkzNsd0UoaxJRwetZdxIvtVk
-凤凰资讯,https://live.264788.xyz/channel/fenghuangweishizixun?streamid=77bd953dbf073e11b80bba0a8aca92c5&livekey=01WgOR41rriMmMkzNsd0UoaxJRwetZdxIvtVk
+凤凰中文,http://123.234.2.58/qctv.fengshows.cn/live/0701pcc72.m3u8
+凤凰资讯,http://123.234.2.58/qctv.fengshows.cn/live/0701pin72.m3u8
 纪实,#genre#
 新纪实,kankan://12|Referer=https://live.kankanews.com/&Origin=https://live.kankanews.com&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
 东方卫视,http://173.208.212.130:8181/720p/dfws.m3u8
