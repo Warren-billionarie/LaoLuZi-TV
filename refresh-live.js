@@ -84,13 +84,21 @@ const C13_FALLBACKS = [
   { url: 'http://58.35.123.183:3333/rtp/233.18.204.32:5140', headers: {} },
 ];
 
-// 五星体育线路(2026-08-01 换线路3:darwin 高清换成 38.75 gslb 跳转器):线路1 udpxy 组播中继(上海电信,SD 720×576 ~2.8Mbps,用户家实测不卡;实时转发零余量+私人盒子);线路2 139.227 txiptv(上海,1080p H.264+MP2 ~8.9Mbps,US 实测 1.9MB/s≈1.7x;7-01 死过一次会 flap);线路3 38.75 gslb(302→192.187.115.106:82/live/wxty,现签 jsbt/jsbk token,10s 分片,真 1080p H.264 High 25fps + AAC 48k,US 实测 2.6MB/s≈5.1x 余量,抓帧确认五星台标+真体育画面);线路4 darwin 标清(streamid 钉死 720×576;源站 shcm 522 死,留着等复活);线路5 kankan://10(火山,仅住宅固网,App端实时取token)。删:darwin 高清(2026-07-16 起源站 522 一直没活)、cdn15.163189/wxty(2026-07-06 确认 403)
+// 五星体育线路:线路1 udpxy 组播中继(上海电信,H.264 Main 720×576 + MP2,2.69Mbps,用户家实测不卡;
+//   ⚠️ 实时转发**零缓冲余量**——只能给 1x,网络一抖就卡,这是结构决定的);
+// 线路2 139.227 txiptv(上海,1080p H.264+MP2 ~8.9Mbps,US 实测 1.9MB/s≈1.7x;7-01 死过一次会 flap);
+// 线路3 darwin 标清(streamid 钉死 720×576;源站 shcm 522 死,留着等复活);
+// 线路4 kankan://10(火山,仅住宅固网,App端实时取token)。
+//
+// ⚠️ 2026-08-02 删掉 `38.75.136.137:98/gslb/dsdqpub/wxtyhd.m3u8?auth=testpub`(曾排线路3):
+//   规格是这几条里最好的(真 1080p H.264 High + AAC,US 实测 2.4-2.6MB/s ≈ 4.7-5.1x 余量,
+//   壳还会在多台后端间轮换),**但用户 TV 长期实测「很多时候显示无法播放,区域问题」**。
+//   👉 教训:五星体育有大量版权节目会插「区域限制」画面,**服务端探测抓帧只能证明"某一刻在播真内容"**,
+//      证明不了全天可用。这类频道必须以电视端长时间实测为准,不能靠一次抓帧下结论。
+// 删:darwin 高清(2026-07-16 起源站 522 一直没活)、cdn15.163189/wxty(2026-07-06 确认 403)
 const WX_PRIMARY = [
   { url: 'http://58.35.123.183:3333/rtp/233.18.204.6:5140', headers: {} },
   { url: 'http://139.227.21.22:9901/tsfile/live/1010_1.m3u8?key=txiptv', headers: {} },
-  // 2026-08-01 用户给的新源。壳每次请求现签 token(jsbt=时间戳/jsbk=md5),所以 live.txt 里存壳地址、
-  // 由电视自己跟 302 —— token 在播放端现取,不存在 Action 预取导致的过期/IP 不匹配。无 UA 限制。
-  { url: 'http://38.75.136.137:98/gslb/dsdqpub/wxtyhd.m3u8?auth=testpub', headers: {} },
   { url: 'https://live.264788.xyz/channel/wuxingtiyu?streamid=574ea4050333d6418edfd71d0df52f43&livekey=01Wb7kjxu1xx2f7s4tcqSAF03RfwBkY7h8Nz2', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
 ];
 const WX_FALLBACKS = [];
