@@ -87,8 +87,11 @@ const C13_FALLBACKS = [
 // 五星体育线路:线路1 udpxy 组播中继(上海电信,H.264 Main 720×576 + MP2,2.69Mbps,用户家实测不卡;
 //   ⚠️ 实时转发**零缓冲余量**——只能给 1x,网络一抖就卡,这是结构决定的);
 // 线路2 139.227 txiptv(上海,1080p H.264+MP2 ~8.9Mbps,US 实测 1.9MB/s≈1.7x;7-01 死过一次会 flap);
-// 线路3 darwin 标清(streamid 钉死 720×576;源站 shcm 522 死,留着等复活);
-// 线路4 kankan://10(火山,仅住宅固网,App端实时取token)。
+// 线路3 kankan://10(火山,仅住宅固网,App端实时取token)。
+//
+// 2026-08-02 删掉 darwin 标清 `live.264788.xyz/channel/wuxingtiyu?streamid=574ea…`(曾排线路3):
+//   源站 shcm-stream-cf1 从 2026-07-16 起 Cloudflare 522 一直没活,留守两周半没等到复活,
+//   用户 TV 实测确认不能看。同账号的 darwin 高清线更早就删了。
 //
 // ⚠️ 2026-08-02 删掉 `38.75.136.137:98/gslb/dsdqpub/wxtyhd.m3u8?auth=testpub`(曾排线路3):
 //   规格是这几条里最好的(真 1080p H.264 High + AAC,US 实测 2.4-2.6MB/s ≈ 4.7-5.1x 余量,
@@ -99,7 +102,6 @@ const C13_FALLBACKS = [
 const WX_PRIMARY = [
   { url: 'http://58.35.123.183:3333/rtp/233.18.204.6:5140', headers: {} },
   { url: 'http://139.227.21.22:9901/tsfile/live/1010_1.m3u8?key=txiptv', headers: {} },
-  { url: 'https://live.264788.xyz/channel/wuxingtiyu?streamid=574ea4050333d6418edfd71d0df52f43&livekey=01Wb7kjxu1xx2f7s4tcqSAF03RfwBkY7h8Nz2', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
 ];
 const WX_FALLBACKS = [];
 
