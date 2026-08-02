@@ -8,6 +8,7 @@
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 0,
+      "timeout": 120,
       "ext": "https://raw.githubusercontent.com/Warren-billionarie/LaoLuZi-TV/main/v.json",
       "style": {
         "type": "rect",
