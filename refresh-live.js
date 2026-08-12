@@ -170,17 +170,19 @@ const JISHI_EXTRA = [
 ];
 
 // ---- static ----
-// 2026-08-12 凤凰双台再换源(用户给的新源)。08-01 换的 qctv 反代(123.234.2.58,山东联通)只活了 11 天:
-// 08-12 实测两台 m3u8 全空响应(TCP 通但不吐数据,curl exit 52),已死,删。
-// 新源 = **163189 家族换新域名 `cdn6.cc.cd` 复活**(旧 cdn6.163189.xyz 2026-07-06 死)。
-// 用户给的 r.jdshipin.com/0Rp07 和 cdn.qd.je/163189.php?id=fhzx 都是壳,最终都指 cdn6.cc.cd
-// ——按 07-01 经验(qd.je 壳不轮询、白多一跳)直接用后端地址。
-// US 实测:两台都是真 1080p!H.264 High 1920×1080 **50fps** + HE-AAC,~3.5Mbps,10s 分片;
-//   资讯 17.0MB/s ≈ 39x 余量,中文 11.2MB/s ≈ 26x 余量(比 qctv 的 2.5-2.9x 高一个数量级)。
-// 抓帧确认台标正确(资讯=蓝色地球台标+新闻走字条,中文=橙色凤凰台标)。
-// ⚠️ 两台同一后端 = 同一故障域,一起死一起活(163189 家族有换链前科,死了别修,等用户给新壳或扫新域名)。
+// 2026-08-12(晚)凤凰中文换源:cdn6 的 fhzw/fhzx 是 1080p**50fps**(High L4.2+3B帧),
+// 用户电视实测「声音正常、画面冻住」= 盒子解码扛不住 50fps(非网络非源死,同刘德华电影 FLV 硬解卡一类病)。
+// 线1 = 港灣直播(everydaytv.top,收费服务的免费分享账号)壳名 jade 实际是凤凰中文,
+//   后端 s15/t52.iptv200.com:8443/live/fhzw,720p **25fps** H.264 L3.1+AAC 仅~0.8Mbps,
+//   2s 小分片起播快,US 实测 6x 余量,无 token/UA/Referer,和 163189 完全独立故障域。
+//   ⚠️ 哈希子域名=账号 token,分享账号随时可能被回收,死了找用户要新分享链接。
+// 线2 = 同 cdn6 后端的 fhhk(凤凰**香港**台,姊妹台节目基本相同),1080p 25fps,US 17x 余量,兜底。
+// 旧 fhzw(50fps)直接删——冻屏的兜底没有意义。
+// 凤凰资讯维持 fhzx(50fps,电视冻屏):08-12 海选全军覆没(详见 memory phoenix-infonews-source-hunt),
+//   等用户从港灣直播同一来源找资讯台分享链接,或攒够重打包需求时做 YouTube extractor。
 const STATIC_CHANNELS = [
-  { alias: '凤凰中文', url: 'https://cdn6.cc.cd/163189/fhzw' },
+  { alias: '凤凰中文', url: 'http://a68c7fdd1bed6600da71182507b4eab9.everydaytv.top/live/ggiptv/jade/playlist.m3u8' },
+  { alias: '凤凰中文', url: 'https://cdn6.cc.cd/163189/fhhk' },
   { alias: '凤凰资讯', url: 'https://cdn6.cc.cd/163189/fhzx' },
 ];
 
