@@ -170,16 +170,18 @@ const JISHI_EXTRA = [
 ];
 
 // ---- static ----
-// 2026-08-01 凤凰双台换源(用户给的新源)。旧的 darwin(264788)从 2026-07-16 起源站 fjct 劣化到
-// ~256KB/s = 0.33x 实时,必卡且无兜底,换低清无解(病在源站不在码率)。
-// 新源 = 凤凰官方 qctv.fengshows.cn 的内容,由 123.234.2.58(山东联通)前置反代,后端腾讯云(分片名带 txspiseq)。
-// 命名即频道:pcc = Phoenix Chinese Channel(中文台),pin = Phoenix InfoNews(资讯台)。
-// US 实测:两台都是 H.264 High 1280×720 25fps + AAC 48k 立体声,4s 分片;
-//   资讯 1.25Mbps / 437KB/s ≈ 2.9x 余量,中文 1.58Mbps / 474KB/s ≈ 2.5x 余量(旧源是 0.33x)。
-// 抓帧确认台标正确(资讯=蓝色地球台标,中文=橙色凤凰台标;早上并机播《早班车》所以画面会一样)。
+// 2026-08-12 凤凰双台再换源(用户给的新源)。08-01 换的 qctv 反代(123.234.2.58,山东联通)只活了 11 天:
+// 08-12 实测两台 m3u8 全空响应(TCP 通但不吐数据,curl exit 52),已死,删。
+// 新源 = **163189 家族换新域名 `cdn6.cc.cd` 复活**(旧 cdn6.163189.xyz 2026-07-06 死)。
+// 用户给的 r.jdshipin.com/0Rp07 和 cdn.qd.je/163189.php?id=fhzx 都是壳,最终都指 cdn6.cc.cd
+// ——按 07-01 经验(qd.je 壳不轮询、白多一跳)直接用后端地址。
+// US 实测:两台都是真 1080p!H.264 High 1920×1080 **50fps** + HE-AAC,~3.5Mbps,10s 分片;
+//   资讯 17.0MB/s ≈ 39x 余量,中文 11.2MB/s ≈ 26x 余量(比 qctv 的 2.5-2.9x 高一个数量级)。
+// 抓帧确认台标正确(资讯=蓝色地球台标+新闻走字条,中文=橙色凤凰台标)。
+// ⚠️ 两台同一后端 = 同一故障域,一起死一起活(163189 家族有换链前科,死了别修,等用户给新壳或扫新域名)。
 const STATIC_CHANNELS = [
-  { alias: '凤凰中文', url: 'http://123.234.2.58/qctv.fengshows.cn/live/0701pcc72.m3u8' },
-  { alias: '凤凰资讯', url: 'http://123.234.2.58/qctv.fengshows.cn/live/0701pin72.m3u8' },
+  { alias: '凤凰中文', url: 'https://cdn6.cc.cd/163189/fhzw' },
+  { alias: '凤凰资讯', url: 'https://cdn6.cc.cd/163189/fhzx' },
 ];
 
 // 体育组静态频道(非 yibababa,Cloudflare 前置,带 UA)
