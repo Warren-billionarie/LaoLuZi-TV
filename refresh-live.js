@@ -206,13 +206,22 @@ const LOOP_CATALOG = 'https://raw.githubusercontent.com/Warren-billionarie/LaoLu
 
 // 电影组静态频道
 const STATIC_MOVIES = [
-  // 经典电影:咪咕跳转器(302→miguvideo H.264 ~2Mbps),每请求现签 token(存跳转器 URL,L2/L3 reload 自愈)。中国移动 host,US 实测 .ts 392KB/s≈1.5x 余量够播,随时段波动
-  { alias: '经典电影', url: 'http://wfenf.x3322.net:7788/625703337', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
+  // 王晶港片(2026-08-13 换,原「经典电影」咪咕跳转器下线):jdshipin:8880 huya.php 壳→虎牙一起看房 11602058「【王晶】港风导演代表」
+  //   (302→diyp.zxyxndc.top/huya/<房号>→al.flv.huya.com 每请求现签 wsSecret,存壳 URL 自愈,同 metshop 玩法)。
+  //   720p25 H.264 Main L3.1+AAC,US 实测 25.00fps 整、B帧正常量,规格对电视硬解友好。
+  //   ⚠️ 一起看房=房主排片:房间号不变但内容会换(此房 08 月前曾转播凤凰卫视),发现内容漂了就删/换房号(虎牙 API profileRoom 一查房名便知)
+  { alias: '王晶港片', url: 'http://cdn.jdshipin.com:8880/huya.php?id=11602058', headers: {} },
   // 动作电影(CHC动作,192.151.150.154):2026-07-25 按用户要求下线,位置让给「老陆子影院」
-  // 周星驰电影:302→198.204.228.26 美国堪萨斯城 Nocix(zbdq 源站家族,同动作电影),US 实测 .ts 5.5MB/s 余量大
-  { alias: '周星驰电影', url: 'http://198.204.228.26/live/lbzxc.m3u8', headers: {} },
+  // 成龙电影(2026-08-13 换,原「周星驰电影」zbdq 源下线):jdshipin 壳→虎牙房 11342386「成龙经典武打动作片」。
+  //   1024×552 H.264 High L3.1 实测 ~25-33fps 带B帧+AAC,抓帧=老港片真内容。
+  //   ⚠️ 几何非16对齐(552%16=8,刘德华 1080×602 前科同款风险因素,但像素只有 720p 一半、负载小得多),电视实测盯卡顿
+  { alias: '成龙电影', url: 'http://cdn.jdshipin.com:8880/huya.php?id=11342386', headers: {} },
   // 周润发电影:302→107.150.42.114:82(zbdq 源站家族,同周星驰/动作电影),480p H.264,US 实测首响 0.26s 真影片(2026-07-08 加)
   { alias: '周润发电影', url: 'http://107.150.60.122/live/lbzrf.m3u8', headers: {} },
+  // 沈腾电影(2026-08-13 加):jdshipin 壳→虎牙房 11601968「【虎牙影院】沈腾经典片放映」。
+  //   ⚠️⚠️ 实测数帧真 1080p60 High L4.1(2148帧/35.78s;虎牙 rateArray 只有「蓝光4M」原画一档,无低帧转码)——
+  //   超「>30fps 冻屏」红线(凤凰 cdn6 50fps 前科),电视大概率「有声无画」;用户知情要求上,实测冻屏就删本条
+  { alias: '沈腾电影', url: 'http://cdn.jdshipin.com:8880/huya.php?id=11601968', headers: {} },
   // 以下 5 条 2026-07-16 加:斗鱼/虎牙 24h 循环放剧直播间壳,壳每请求现签 token(302→FLV,存壳URL自愈),H.264+AAC FLV。US 办公室实测全通,CDN 无地域封锁
   // 冰冰影院:goodiptv 壳→hw3.douyucdn2.cn 斗鱼,720p,实测古装剧《洗冤录》
   { alias: '冰冰影院', url: 'http://www.goodiptv.club/douyu/74374', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
