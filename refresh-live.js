@@ -193,8 +193,15 @@ const STATIC_SPORTS = [
   { alias: '富士体育', url: 'https://fujitv4.mov3.co/hls/fujitv.m3u8', headers: {} },
 ];
 
-// 「老陆子影院」轮播片单表。App 端 bili:// 解析器开台时拉这张表,按墙上时钟算出此刻该播哪部
-// 哪一秒。表是静态的(片长不变),内容变了才需要重跑 build-catalog 重生成,不进 6h 刷新循环。
+// 「老登放映厅」(原「老陆子影院」,2026-08-13 换内容并改名)轮播片单表。App 端 bili:// 解析器
+// 开台时拉这张表,按墙上时钟算出此刻该播哪部哪一秒。表是静态的(片长不变),内容变了才需要重生成,
+// 不进 6h 刷新循环。⚠️ epoch=1784980800 千万不能改。
+// 2026-08-13 内容从 686 部译制片换成 5 部剧 57 条目/183.7h(轮转 7.7 天),验收记录见工作进度.md:
+//   幽游白书 112集(14块×8集,全干净) / 三国志 47集(6块,7个P尾部有~17min风景垫片,用户知情照播)
+//   / 晚酌的流派 53集(7块,每集尾~4-5min游戏CG垫片,知情) / 破产姐妹 18P(每P一块,P头2h风景+
+//   全程窗录,知情;开头垫片可长按右键快进跳过) / 孤独的美食家S11 12集(独立BV合集,全干净)。
+// ⚠️ 调度器每天只播当日批次前 24h(Bili.java fetchLoop),所以剧必须切成几小时的小块,
+//   单条目绝不能超过 24h(否则超出部分永远轮不到);现最长条目 5.6h。
 const LOOP_CATALOG = 'https://raw.githubusercontent.com/Warren-billionarie/LaoLuZi-TV/main/c.json';
 
 // 电影组静态频道
@@ -222,10 +229,10 @@ const STATIC_MOVIES = [
   { alias: '热门港剧', url: 'http://www.goodiptv.club/douyu/5522351', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
   // 七龙珠(metshop 壳→虎牙 11601966):2026-07-25 按用户要求下线
   //
-  // ⚠️ 老陆子影院必须留在最后一条 —— LiveParser 的 txt 分支解析 `|Key=Value` 时,header map 是
+  // ⚠️ 老登放映厅必须留在最后一条 —— LiveParser 的 txt 分支解析 `|Key=Value` 时,header map 是
   //    整个文件共享的、只在遇到 `#genre#` 时才清空,所以本行注入的 Referer 会「粘」到后面所有频道上。
   //    电影是最后一组、本条是组内最后一条 = 全文件最后一行,后面没有频道可被污染。加新台请加在本条之前。
-  { alias: '老陆子影院', url: `bili://loop?src=${LOOP_CATALOG}`, headers: { 'Referer': 'https://www.bilibili.com' } },
+  { alias: '老登放映厅', url: `bili://loop?src=${LOOP_CATALOG}`, headers: { 'Referer': 'https://www.bilibili.com' } },
 ];
 
 // ============================================================

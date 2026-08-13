@@ -48,4 +48,4 @@ CCTV13,http://58.35.123.183:3333/rtp/233.18.204.32:5140
 古装武侠,http://www.goodiptv.club/douyu/2793084|User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
 橙记港剧,http://www.goodiptv.club/douyu/4549169|User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
 热门港剧,http://www.goodiptv.club/douyu/5522351|User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
-老陆子影院,bili://loop?src=https://raw.githubusercontent.com/Warren-billionarie/LaoLuZi-TV/main/c.json|Referer=https://www.bilibili.com
+老登放映厅,bili://loop?src=https://raw.githubusercontent.com/Warren-billionarie/LaoLuZi-TV/main/c.json|Referer=https://www.bilibili.com
