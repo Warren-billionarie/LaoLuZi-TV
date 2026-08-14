@@ -227,8 +227,7 @@ const STATIC_MOVIES = [
   { alias: '冰冰影院', url: 'http://www.goodiptv.club/douyu/74374', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
   // 刀刀影院:goodiptv 壳→hw1a.douyucdn2.cn 斗鱼,1080p,实测《水浒传》
   { alias: '刀刀影院', url: 'http://www.goodiptv.club/douyu/747764', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
-  // 华语影院:goodiptv 壳→斗鱼(IP中转),1080p,实测《倚天屠龙记》
-  { alias: '华语影院', url: 'http://www.goodiptv.club/douyu/3928', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
+  // 华语影院(goodiptv 壳→斗鱼 3928):2026-08-13 按用户要求下线
   // 古装武侠:goodiptv 壳→hw3.douyucdn2.cn 斗鱼,720p,实测《侠客行》
   { alias: '古装武侠', url: 'http://www.goodiptv.club/douyu/2793084', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
   // 刘德华电影(metshop 壳→虎牙 al.flv):2026-07-17 删除——直播FLV在电视盒子硬解+跨洋Wi-Fi下结构性卡顿(1080×602 非标准几何+B帧+时间戳不规整),VLC软解不卡,改源无解
