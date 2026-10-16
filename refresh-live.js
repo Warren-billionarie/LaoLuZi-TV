@@ -19,7 +19,7 @@ tSqSgXDcJ7yDj5rc7wIDAQAB
 };
 
 const SOURCE_A_CHANNELS = [
-  { id: 10, name: '五星体育', group: '体育' },
+  // 删(2026-10-16):{ id: 10 五星体育 } —— kapi channel/detail 对五星返回 live_address="",官方网页端已不发流,与 IP 无关
   { id: 12, name: '新纪实', group: '纪实' },
 ];
 
@@ -63,12 +63,12 @@ const SOURCE_C_CHANNELS = [];
 
 const C9_FALLBACKS = [
   { url: 'http://74.91.26.218:82/live/cctv9hd.m3u8', headers: {} },
-  { url: 'https://timetv.shop/http://74.91.26.218:82/live/cctv9hd.m3u8', headers: { Origin: 'https://yibababa.com' } },
+  // 删(2026-10-16):timetv.shop 反代 —— 域名 DNS 不解析,整站死
   // 3) 咪咕壳(mg.cttv.vip→miguvideo 中国移动 CDN),H.264 720p25+AAC,无 header/壳现取 token 不过期。
   //    线路1/2 同为 74.91 单机后端,此线是唯一独立 CDN,74.91 挂时靠它兜底(2026-07-01 US 实测 ~1MB/s≈3x 余量;跨太平洋 + 会 flap,故列末位)
   { url: 'http://mg.cttv.vip/673168140', headers: {} },
   // 4) udpxy 组播中继(上海电信,CCTV9 只有 HD 1080p ~8.5Mbps),独立故障域末位兜底;实时转发零余量,跨洋 8Mbps 波动易卡(2026-07-06 US 测实时比 0.99x)。SD 段无 CCTV9,只此一条
-  { url: 'http://58.35.123.183:3333/rtp/233.18.204.75:5140', headers: {} },
+  // 删(2026-10-16):udpxy 58.35.123.183 .75 —— 盒子整机离线(check-host 多国节点全超时)
 ];
 
 const C13_FALLBACKS = [
@@ -79,9 +79,9 @@ const C13_FALLBACKS = [
   //    用户 2026-07-17 报旧线(74.91)不能看后指定换此源(US 实测 .ts 2.7MB/s≈13x 余量,std 干净真画面)
   { url: 'http://198.204.228.26/live/cctv13hd.m3u8', headers: {} },
   { url: 'http://74.91.26.218:82/live/cctv13hd.m3u8', headers: {} },
-  { url: 'https://timetv.shop/http://74.91.26.218:82/live/cctv13hd.m3u8', headers: { Origin: 'https://yibababa.com' } },
+  // 删(2026-10-16):timetv.shop 反代 —— 域名 DNS 不解析
   // 3) udpxy 组播中继(上海电信,SD 720×576 ~2.8Mbps),独立故障域末位兜底;实时转发零余量+私人盒子,跨洋波动会卡(2026-07-06 US 测实时比 0.99x)。同盒 HD 版 233.18.204.79:5140 未用
-  { url: 'http://58.35.123.183:3333/rtp/233.18.204.32:5140', headers: {} },
+  // 删(2026-10-16):udpxy 58.35.123.183 .32 —— 盒子整机离线
 ];
 
 // 五星体育线路:线路1 udpxy 组播中继(上海电信,H.264 Main 720×576 + MP2,2.69Mbps,用户家实测不卡;
@@ -110,15 +110,14 @@ const C13_FALLBACKS = [
 //      证明不了全天可用。这类频道必须以电视端长时间实测为准,不能靠一次抓帧下结论。
 // 删:darwin 高清(2026-07-16 起源站 522 一直没活)、cdn15.163189/wxty(2026-07-06 确认 403)
 const WX_PRIMARY = [
-  { url: 'http://58.35.123.183:3333/rtp/233.18.204.6:5140', headers: {} },
-  { url: 'http://139.227.21.22:9901/tsfile/live/1010_1.m3u8?key=txiptv', headers: {} },
+  // 删(2026-10-16):udpxy 58.35.123.183 .6 和 txiptv 139.227.21.22 —— 两台整机离线(本机+check-host 印度/伊朗/荷兰/香港全超时)
   // 2026-08-12 用户给的新源,替换整机离线的 116.237 udpxy 盒子。跳转壳(每请求现签 token),
   // 抓帧确认真五星画面(壁球公开赛);720p H.264 High + AAC,4.3Mbps,US 10.6x 余量。
   // ⚠️ 后端 = 08-02 删的 38.75 同一台(192.187.115.106:82),版权时段会插区域限制画面,用户知情接受。
   { url: 'http://107.150.60.122/live/wxtyhd.m3u8', headers: {} },
   // 2026-08-12 用户给的新源。又一台 udpxy 盒子(不是线路1 那台,也不是死掉的 116.237),转组播 .58 高清。
   // 12s 收 12.6MB≈8.4Mbps 跑满码率,1080p H.264 High + MP2,抓帧真五星画面(《赛场》包装)。
-  { url: 'http://58.35.63.158:4022/rtp/233.18.204.58:5140', headers: {} },
+  // 删(2026-10-16):udpxy 58.35.63.158:4022 .58 —— 主机在但端口拒绝(udpxy 没开)
 ];
 const WX_FALLBACKS = [];
 
@@ -138,20 +137,20 @@ const C5_FALLBACKS = [
   // 6) cqshushu php 壳 → 301→icntvcdn 未来电视 CDN(120.220.164.81 中国联通山东),1080p H.264 SAR1:1 真16:9;US 实测 .ts 2.7Mbps 余量 2.4x、首响 0.9-1.5s(2026-07-08 换掉过期的 cctv5-2:原 163189/cctv5-2 已 302→expired.html 死)
   { url: 'http://iptv.cqshushu.com/ysws.php?id=cctv5', headers: {} },
   // 7) 美国堪萨斯城 69.30 直连 1080p 无 key(原主线,2026-07-01 降末尾兜底)
-  { url: 'http://69.30.245.50/live/cctv5.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
+  // 删(2026-10-16):69.30.245.50 —— 返回 "the content is not available in your area",已地域封锁
   // 8) ysp 540p 经 timetv 反代,低带宽末线兜底
-  { url: 'https://timetv.shop/http://43.152.31.17:843/hlslive-tx-cdn.ysp.cctv.cn/ysp/2024078401_dlna.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
+  // 删(2026-10-16):timetv.shop 反代 —— 域名 DNS 不解析
   // 9) udpxy 组播中继(上海电信,SD 720×576 ~2.8Mbps),独立故障域末位兜底;实时转发零余量+私人盒子,跨洋波动会卡(2026-07-06 US 测实时比 0.96x)。同盒 HD 版 233.18.204.71:5140 8Mbps 跨洋更易卡未用
-  { url: 'http://58.35.123.183:3333/rtp/233.18.204.24:5140', headers: {} },
+  // 删(2026-10-16):udpxy 58.35.123.183 .24 —— 盒子整机离线
   // 删(2026-07-01):cdn16/cctv5(旧线路2)、darwin cctv5(livekey 账号级随时挂)
 ];
 
 // CCTV5+ 全显式 4 条线路(顺序即播放优先级,2026-06-25 实测重排):
 const C5P_FALLBACKS = [
   // 1) 163189 CF 前置 1080p,无 key,US/叔叔家友好(真 TS 伪装成 image/jpeg,魔数 0x47)—— 主力(2026-07-01 提为线路1,实测 1080p std59 5.4MB/s)
-  { url: 'https://cdn16.163189.xyz/163189/cctv5p', headers: { Origin: SOURCE_B.ORIGIN } },
+  // 删(2026-10-16):cdn16.163189/cctv5p —— 302→cdn5.163189.xyz/expired.html
   // 2) 咪咕壳(mg.cttv.vip→miguvideo 中国移动 CDN),H.264 720p25+AAC,无 header/壳现取 token 不过期。独立 CDN 备份(2026-07-01 US 实测 ~1MB/s≈3x 余量;跨太平洋+会 flap)
-  { url: 'http://mg.cttv.vip/641886773', headers: {} },
+  // 删(2026-10-16):咪咕 641886773 —— 400 "节目播出调整",面板 ID 未变是咪咕自己下了,日后可试加回
   // 3) 加拿大 720p(302→69.197.149.218)
   { url: 'http://207.56.13.146:81/cdnlive/cctv5p.m3u8', headers: { Origin: SOURCE_B.ORIGIN } },
   // 3) ysp 直连 540p(2024078001),低带宽末线兜底
@@ -188,7 +187,7 @@ const STATIC_CHANNELS = [
 
 // 体育组静态频道(非 yibababa,Cloudflare 前置,带 UA)
 const STATIC_SPORTS = [
-  { alias: 'ESPN', url: 'https://t.freetv.fun/live/espn.m3u8', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
+  // 删(2026-10-16):ESPN freetv.fun —— 07-06 起 5xx/超时,用户决定暂不要 ESPN
   // 富士体育:美国 Buffalo host(HostPapa),真直播 5s 分片,用户实测可播
   { alias: '富士体育', url: 'https://fujitv4.mov3.co/hls/fujitv.m3u8', headers: {} },
 ];
@@ -210,18 +209,21 @@ const STATIC_MOVIES = [
   //   (302→diyp.zxyxndc.top/huya/<房号>→al.flv.huya.com 每请求现签 wsSecret,存壳 URL 自愈,同 metshop 玩法)。
   //   720p25 H.264 Main L3.1+AAC,US 实测 25.00fps 整、B帧正常量,规格对电视硬解友好。
   //   ⚠️ 一起看房=房主排片:房间号不变但内容会换(此房 08 月前曾转播凤凰卫视),发现内容漂了就删/换房号(虎牙 API profileRoom 一查房名便知)
-  { alias: '王晶港片', url: 'http://cdn.jdshipin.com:8880/huya.php?id=11602058', headers: {} },
+  //   ⚠️ 2026-10-16 jdshipin 壳死(302→diyp.zxyxndc.top DNS 不解析),房间还在播,换 goodiptv 虎牙壳(302→al.flv.huya.com 现签);实抓 720p24 ~4x
+  { alias: '王晶港片', url: 'https://www.goodiptv.club/huya/11602058', headers: {} },
   // 动作电影(CHC动作,192.151.150.154):2026-07-25 按用户要求下线,位置让给「老陆子影院」
   // 成龙电影(2026-08-13 换,原「周星驰电影」zbdq 源下线):jdshipin 壳→虎牙房 11342386「成龙经典武打动作片」。
   //   1024×552 H.264 High L3.1 实测 ~25-33fps 带B帧+AAC,抓帧=老港片真内容。
   //   ⚠️ 几何非16对齐(552%16=8,刘德华 1080×602 前科同款风险因素,但像素只有 720p 一半、负载小得多),电视实测盯卡顿
-  { alias: '成龙电影', url: 'http://cdn.jdshipin.com:8880/huya.php?id=11342386', headers: {} },
+  //   2026-10-16 同上换 goodiptv 壳;实抓 1024×560 24fps ~4x
+  { alias: '成龙电影', url: 'https://www.goodiptv.club/huya/11342386', headers: {} },
   // 周润发电影:302→107.150.42.114:82(zbdq 源站家族,同周星驰/动作电影),480p H.264,US 实测首响 0.26s 真影片(2026-07-08 加)
   { alias: '周润发电影', url: 'http://107.150.60.122/live/lbzrf.m3u8', headers: {} },
   // 沈腾电影(2026-08-13 加):jdshipin 壳→虎牙房 11601968「【虎牙影院】沈腾经典片放映」。
   //   ⚠️⚠️ 实测数帧真 1080p60 High L4.1(2148帧/35.78s;虎牙 rateArray 只有「蓝光4M」原画一档,无低帧转码)——
   //   超「>30fps 冻屏」红线(凤凰 cdn6 50fps 前科),电视大概率「有声无画」;用户知情要求上,实测冻屏就删本条
-  { alias: '沈腾电影', url: 'http://cdn.jdshipin.com:8880/huya.php?id=11601968', headers: {} },
+  //   2026-10-16 同上换 goodiptv 壳;实抓仍 1080p60
+  { alias: '沈腾电影', url: 'https://www.goodiptv.club/huya/11601968', headers: {} },
   // 以下 5 条 2026-07-16 加:斗鱼/虎牙 24h 循环放剧直播间壳,壳每请求现签 token(302→FLV,存壳URL自愈),H.264+AAC FLV。US 办公室实测全通,CDN 无地域封锁
   // 冰冰影院:goodiptv 壳→hw3.douyucdn2.cn 斗鱼,720p,实测古装剧《洗冤录》
   { alias: '冰冰影院', url: 'http://www.goodiptv.club/douyu/74374', headers: { 'User-Agent': SOURCE_A_HEADERS['User-Agent'] } },
