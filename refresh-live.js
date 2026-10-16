@@ -39,12 +39,16 @@ const SOURCE_B = {
   FEEDS: {
     cctv5: 'https://yibababa.com/tv/cctv5/cctv5.txt',
     sport: 'https://yibababa.com/tv/sport/sport.txt',
+    // 中文台页 https://yibababa.com/tv/chinese/ 的「KL线路」= KylinTV(美国华人 IPTV)清单,2026-10-16 用户发现其凤凰资讯可看
+    kl: 'https://yibababa.com/tv/chinese/kylintv.txt',
   },
 };
 
 const SOURCE_B_WANTED = [
   // CCTV5 / CCTV5+ 均不再走 yibababa feed 探活,改为下方 C5_FALLBACKS / C5P_FALLBACKS 全显式列源(精确控制线路顺序)
   { feed: 'sport', match: /^Eurosport 1,/, alias: 'Eurosport 1', headers: {} },
+  // 凤凰资讯 KL 线:每次刷新从 kylintv.txt 重新取(哈希子域名若换会自动跟),unwrap 剥 tcplayer 壳;feed 挂了由下方 STATIC_CHANNELS 同 URL 兜底(build 里按 URL 去重)
+  { feed: 'kl', match: /^凤凰资讯,/, alias: '凤凰资讯', headers: {} },
   // ESPN: yibababa 已删纯 ESPN,仅剩死的 "ESPN 2"(143.244.60.30 connection refused),暂撤,待新源
 ];
 
@@ -182,6 +186,11 @@ const JISHI_EXTRA = [
 const STATIC_CHANNELS = [
   { alias: '凤凰中文', url: 'http://a68c7fdd1bed6600da71182507b4eab9.everydaytv.top/live/ggiptv/jade/playlist.m3u8' },
   { alias: '凤凰中文', url: 'https://cdn6.cc.cd/163189/fhhk' },
+  // 凤凰资讯线1(2026-10-16 用户发现于 yibababa 中文台「KL线路」):KylinTV 的 `<哈希>.kylintv.tv`(固定 DNS 记录→CDN77 89.187.187.18,改一位哈希即不解析=专属入口非通配),
+  //   无 header/token,10s 分片;实测 H.264 Main L3.1 1280×720 **25fps** 1B帧+AAC ~1.6Mbps,分片 9.8MB/s≈50x 余量,抓帧蓝地球台标《洲际快车》确认真凤凰资讯。
+  //   与上面 SOURCE_B_WANTED 的 kl feed 同 URL,feed 正常时此行被去重,feed 挂了此行兜底。
+  { alias: '凤凰资讯', url: 'https://7612-5516-affc-d88b.kylintv.tv/live/pxinhd_iphone.m3u8' },
+  // 凤凰资讯线2:cdn6 fhzx 1080p50 电视冻屏,降为末位兜底(2026-10-16)
   { alias: '凤凰资讯', url: 'https://cdn6.cc.cd/163189/fhzx' },
 ];
 
@@ -526,7 +535,7 @@ function build({ aResults, bResults, bExtra, c9Lines, c13Lines, statics }) {
     const s = ch.headers && Object.keys(ch.headers).length > 0 ? suffix(ch.headers) : '';
     lines.push(`${ch.alias},${ch.url}${s}`);
   }
-  for (const ch of bResults.filter(c => c.alias !== 'CCTV5' && c.alias !== 'CCTV5+')) {
+  for (const ch of bResults.filter(c => c.alias !== 'CCTV5' && c.alias !== 'CCTV5+' && !c.alias.startsWith('凤凰'))) {
     const s = ch.headers && Object.keys(ch.headers).length > 0 ? suffix(ch.headers) : '';
     lines.push(`${ch.alias},${ch.url}${s}`);
   }
@@ -548,7 +557,21 @@ function build({ aResults, bResults, bExtra, c9Lines, c13Lines, statics }) {
   for (const ch of statics.filter(c => c.alias.startsWith('CCTV'))) lines.push(`${ch.alias},${ch.url}`);
 
   lines.push('港澳台,#genre#');
-  for (const ch of statics.filter(c => c.alias.startsWith('凤凰'))) lines.push(`${ch.alias},${ch.url}`);
+  // 按 STATIC_CHANNELS 里的频道顺序逐台输出;每台先动态(yibababa KL feed)后静态,同 URL 去重
+  // (feed 正常时静态兜底行自然消失;同名行保持相邻,不依赖解析器跨行合并)
+  const hkAliases = [...new Set(statics.filter(c => c.alias.startsWith('凤凰')).map(c => c.alias))];
+  for (const alias of hkAliases) {
+    const seen = new Set();
+    for (const ch of bResults.filter(c => c.alias === alias)) {
+      if (seen.has(ch.url)) continue; seen.add(ch.url);
+      const s = ch.headers && Object.keys(ch.headers).length > 0 ? suffix(ch.headers) : '';
+      lines.push(`${alias},${ch.url}${s}`);
+    }
+    for (const ch of statics.filter(c => c.alias === alias)) {
+      if (seen.has(ch.url)) continue; seen.add(ch.url);
+      lines.push(`${alias},${ch.url}`);
+    }
+  }
 
   const jishi = aResults.filter(c => (c.group || '体育') === '纪实');
   if (jishi.length || JISHI_EXTRA.length) {
